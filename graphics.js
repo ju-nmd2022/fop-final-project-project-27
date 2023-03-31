@@ -137,6 +137,80 @@ function chocolateBar(x, y) {
   ellipse(650, 200, 30, 20);
 }
 
+let x = 100;
+
+//popcorn drawing
+function popcornDrawing(x, y) {
+  push();
+  noStroke();
+  fill(255, 225, 145);
+  ellipse(100, 100, 20);
+  ellipse(115, 93, 20);
+  ellipse(132, 95, 20);
+  ellipse(149, 91, 25);
+  ellipse(167, 94, 20);
+  ellipse(130, 77, 25);
+  ellipse(151, 76, 20);
+  ellipse(108, 78, 23);
+  pop();
+
+  push();
+  noStroke();
+  rect(100, 100, 15, 80);
+  rect(129, 100, 15, 80);
+  rect(155, 100, 15, 80);
+  fill(255, 0, 0);
+  rect(114, 100, 15, 80);
+  rect(144, 100, 15, 80);
+  pop();
+}
+
+//mouse drawing
+function mouseDrawing(x, y) {
+  
+  push();
+  noStroke();
+  fill(176, 176, 176);
+  ellipse(100, 100, 60);
+  ellipse(75, 72, 30);
+  ellipse(119, 70, 30);
+  pop();
+  
+  push();
+  noStroke();
+  fill(201, 201, 201);
+  ellipse(99, 108, 15, 10);
+  pop();
+
+  push();
+  noStroke();
+  fill(247, 210, 210);
+  ellipse(75, 72, 20);
+  ellipse(119, 70, 20);
+  ellipse(99, 106, 10, 5);
+  pop();
+  
+  push();
+  fill(0, 0, 0);
+  ellipse(87, 91, 7);
+  ellipse(110, 90, 7);
+  pop();
+
+  push();
+  fill(0, 0, 0);
+  noStroke();
+  ellipse(87, 91, 7);
+  ellipse(110, 90, 7);
+  line(118, 103, 132, 97);
+  line(117, 112, 132, 110);
+  line(118, 120, 130, 121);
+  line(82, 107, 64, 104);
+  line(82, 114, 66, 116);
+  line(83, 121, 70, 126);
+  pop();
+  pop();
+}
+
 function draw() {
   scenery();
   movingCone();
@@ -146,4 +220,6 @@ function draw() {
   iceCreamVanilla(-150, -200);
   watermelon();
   chocolateBar();
+  popcornDrawing();
+  mouseDrawing();
 }
