@@ -31,7 +31,6 @@ function iceCreamCone(x, y) {
   line(460, 400, 440, 440);
   line(450, 400, 435, 430);
   line(440, 400, 430, 420);
-
   pop();
 }
 
@@ -137,11 +136,10 @@ function chocolateBar(x, y) {
   ellipse(650, 200, 30, 20);
 }
 
-let x = 100;
-
 //popcorn drawing
 function popcornDrawing(x, y) {
   push();
+  translate(x, y);
   noStroke();
   fill(255, 225, 145);
   ellipse(100, 100, 20);
@@ -155,6 +153,7 @@ function popcornDrawing(x, y) {
   pop();
 
   push();
+  translate(x, y);
   noStroke();
   rect(100, 100, 15, 80);
   rect(129, 100, 15, 80);
@@ -167,36 +166,40 @@ function popcornDrawing(x, y) {
 
 //mouse drawing
 function mouseDrawing(x, y) {
-  
   push();
+  translate(x, y);
   noStroke();
   fill(176, 176, 176);
   ellipse(100, 100, 60);
   ellipse(75, 72, 30);
   ellipse(119, 70, 30);
   pop();
-  
+
   push();
+  translate(x, y);
   noStroke();
   fill(201, 201, 201);
   ellipse(99, 108, 15, 10);
   pop();
 
   push();
+  translate(x, y);
   noStroke();
   fill(247, 210, 210);
   ellipse(75, 72, 20);
   ellipse(119, 70, 20);
   ellipse(99, 106, 10, 5);
   pop();
-  
+
   push();
+  translate(x, y);
   fill(0, 0, 0);
   ellipse(87, 91, 7);
   ellipse(110, 90, 7);
   pop();
 
   push();
+  translate(x, y);
   fill(0, 0, 0);
   noStroke();
   ellipse(87, 91, 7);
@@ -208,6 +211,39 @@ function mouseDrawing(x, y) {
   line(82, 114, 66, 116);
   line(83, 121, 70, 126);
   pop();
+}
+
+function levelPanel() {
+  push();
+  fill(255, 255, 255);
+  rect(400, 0, 150, 50, 20);
+  stroke(190, 225, 230);
+  strokeWeight(2);
+  rect(410, 8, 130, 35, 20);
+  pop();
+}
+
+function randomIcecreamPattern() {
+  push();
+  fill(255, 255, 255);
+  rect(860, 0, 100, 200, 20);
+  stroke(190, 225, 230);
+  strokeWeight(2);
+  rect(870, 10, 80, 180, 20);
+  pop();
+}
+
+function screenNextLevel() {
+  push();
+  fill(190, 225, 230);
+  rect(380, 240, 200, 80, 20);
+  stroke(255, 255, 255);
+  strokeWeight(2);
+  rect(390, 250, 180, 60, 20);
+  noStroke();
+  textSize(30);
+  fill(255, 255, 255);
+  text("Next level🍦", 400, 290);
   pop();
 }
 
@@ -221,5 +257,8 @@ function draw() {
   watermelon();
   chocolateBar();
   popcornDrawing();
-  mouseDrawing();
+  mouseDrawing(400, 240);
+  levelPanel();
+  randomIcecreamPattern();
+  screenNextLevel();
 }
