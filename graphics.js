@@ -164,52 +164,26 @@ function popcornDrawing(x, y) {
   pop();
 }
 
-//mouse drawing
-function mouseDrawing(x, y) {
+function lollipopDrawing(x, y) {
   push();
   translate(x, y);
   noStroke();
-  fill(176, 176, 176);
-  ellipse(100, 100, 60);
-  ellipse(75, 72, 30);
-  ellipse(119, 70, 30);
+  fill(255, 255, 255);
+  rect(95, 245, 10, 53, 2);
+  pop();
+  
+  push();
+  translate(x, y);
+  noStroke();
+  fill(225, 18, 153);
+  ellipse(100, 231, 40);
   pop();
 
   push();
   translate(x, y);
   noStroke();
-  fill(201, 201, 201);
-  ellipse(99, 108, 15, 10);
-  pop();
-
-  push();
-  translate(x, y);
-  noStroke();
-  fill(247, 210, 210);
-  ellipse(75, 72, 20);
-  ellipse(119, 70, 20);
-  ellipse(99, 106, 10, 5);
-  pop();
-
-  push();
-  translate(x, y);
-  fill(0, 0, 0);
-  ellipse(87, 91, 7);
-  ellipse(110, 90, 7);
-  pop();
-
-  push();
-  translate(x, y);
-  fill(0, 0, 0);
-  noStroke();
-  ellipse(87, 91, 7);
-  ellipse(110, 90, 7);
-  line(118, 103, 132, 97);
-  line(117, 112, 132, 110);
-  line(118, 120, 130, 121);
-  line(82, 107, 64, 104);
-  line(82, 114, 66, 116);
-  line(83, 121, 70, 126);
+  fill(255, 95, 158);
+  rect(78, 227, 44, 10, 5);
   pop();
 }
 
@@ -247,7 +221,7 @@ function screenNextLevel() {
   pop();
 }
 
-function draw() {
+/*function draw() {
   scenery();
   movingCone();
   iceCreamStrawberry(50, 50);
@@ -257,8 +231,33 @@ function draw() {
   watermelon();
   chocolateBar();
   popcornDrawing();
-  mouseDrawing(400, 240);
   levelPanel();
   randomIcecreamPattern();
+  lollipopDrawing();
   screenNextLevel();
+}*/
+
+//start screen
+function startScreen() {
+  scenery();
+  noStroke();
+  fill(255, 255, 255);
+  rect(330, 245, 300, 50, 10);
+  fill(0, 0, 0);
+  textSize(25);
+  text("Press any key to start", 355, 280);
+  noFill();
+  stroke (185, 233, 252);
+  rect(340, 250, 280, 40, 10);
+  iceCreamCone(-280, -280);
+  iceCreamStrawberry(-279, -280);
+  iceCreamCone(319, 11);
+  iceCreamMint(319, 11);
+  watermelon(600, 50);
+  chocolateBar(-360, 190);
+  iceCreamCone(320, -140);
+  iceCreamVanilla(320, -140);
+  lollipopDrawing(67, 405);
 }
+
+startScreen();
