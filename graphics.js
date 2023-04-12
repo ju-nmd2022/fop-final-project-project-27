@@ -164,6 +164,7 @@ function popcornDrawing(x, y) {
   pop();
 }
 
+//lollipop drawing
 function lollipopDrawing(x, y) {
   push();
   translate(x, y);
@@ -187,6 +188,7 @@ function lollipopDrawing(x, y) {
   pop();
 }
 
+//level panel
 function levelPanel() {
   push();
   fill(255, 255, 255);
@@ -197,8 +199,10 @@ function levelPanel() {
   pop();
 }
 
+//panel for the ice cream model
 function randomIcecreamPattern() {
   push();
+  noStroke();
   fill(255, 255, 255);
   rect(860, 0, 100, 200, 20);
   stroke(190, 225, 230);
@@ -207,6 +211,7 @@ function randomIcecreamPattern() {
   pop();
 }
 
+//next level screen
 function screenNextLevel() {
   push();
   fill(190, 225, 230);
@@ -220,6 +225,18 @@ function screenNextLevel() {
   text("Next level🍦", 400, 290);
   pop();
 }
+
+function clouds(x, y) {
+  push();
+  translate(x, y);
+  fill(255, 255, 255);
+  noStroke();
+  ellipse(100, 100, 30);
+  ellipse(120, 100, 30);
+  ellipse(140, 100, 30);
+  pop();
+}
+
 
 /*function draw() {
   scenery();
@@ -239,16 +256,34 @@ function screenNextLevel() {
 
 //start screen
 function startScreen() {
+  
   scenery();
+  push();
   noStroke();
   fill(255, 255, 255);
   rect(330, 245, 300, 50, 10);
+  pop();
+  
+  push();
   fill(0, 0, 0);
   textSize(25);
   text("Press any key to start", 355, 280);
+  pop();
+
+  push();
   noFill();
   stroke (185, 233, 252);
   rect(340, 250, 280, 40, 10);
+  pop();
+
+  clouds();
+  clouds(75, 162);
+  clouds(750, 262);
+  clouds(494, 312);
+  clouds(660, 140);
+  clouds(129, 327);
+  clouds(797, -46);
+
   iceCreamCone(-280, -280);
   iceCreamStrawberry(-279, -280);
   iceCreamCone(319, 11);
@@ -257,7 +292,68 @@ function startScreen() {
   chocolateBar(-360, 190);
   iceCreamCone(320, -140);
   iceCreamVanilla(320, -140);
-  lollipopDrawing(67, 405);
+  lollipopDrawing(350, -39);
+  popcornDrawing(1070, -170);
 }
 
-startScreen();
+//startScreen();
+
+function instructionsPanel() {
+  scenery();
+  push();
+  fill(0, 0, 0);
+  textSize(25);
+  text("Move the cone with the left and right arrows", 230, 280);
+  pop();
+
+  push();
+  fill(255, 255, 255);
+  noStroke();
+  rect(270, 380, 100, 50, 10);
+  rect(540, 380, 100, 50, 10);
+  pop();
+
+  push();
+  noFill();
+  stroke (185, 233, 252);
+  rect(275, 385, 90, 40, 10);
+  rect(545, 385, 90, 40, 10);
+  pop();
+
+  randomIcecreamPattern();
+
+  push();
+  fill(0, 0, 0);
+  noStroke();
+  triangle(305, 404, 328, 393, 328, 415);
+  triangle(604, 404, 576, 393, 577, 415);
+  pop();
+
+  iceCreamCone(0, -50);
+}
+
+//instructionsPanel();
+
+function loseScreen() {
+  scenery();
+
+  clouds();
+  clouds(75, 162);
+  clouds(750, 262);
+  clouds(494, 312);
+  clouds(660, 140);
+  clouds(129, 327);
+  clouds(797, -46);
+  
+  push();
+  fill(0, 0, 0);
+  textSize(25);
+  text("you lost", 430, 230);
+  text("better luck next time", 370, 310);
+  pop();
+
+  
+
+}
+
+//loseScreen();
