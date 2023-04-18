@@ -3,10 +3,25 @@ function scenery() {
   background(185, 233, 252);
 }
 
+// https://happycoding.io/tutorials/p5js/arrays
+// https://www.youtube.com/watch?v=_H9JIwWP7HQ
+// debug chatgpt
+function setup() {
+  for (let i = 0; i < 20; i++) {
+    let item = {
+      x: random(width),
+      y: random(0, -2, -5, -20),
+      speed: random(1, 2, 3),
+      type: random(["strawberry", "mint", "vanilla", "grape"]),
+    };
+    itemsFalling.push(item);
+  }
+}
 //Variables
 let x = 100;
 let y = 60;
 let speed = 0;
+let itemsFalling = [];
 
 //Ice cream cone drawing
 function iceCreamCone(x, y) {
@@ -53,10 +68,10 @@ function iceCreamStrawberry(x, y) {
   translate(x, y);
   noStroke();
   fill(255, 0, 110);
-  ellipse(458, 362, 78, 78);
-  ellipse(429, 397, 30, 30);
-  ellipse(459, 397, 30, 30);
-  ellipse(487, 397, 30, 30);
+  ellipse(x, y, 78, 78);
+  ellipse(x - 29, y + 35, 30, 30);
+  ellipse(x, y + 35, 30, 30);
+  ellipse(x + 29, y + 35, 30, 30);
   pop();
 }
 
@@ -65,10 +80,10 @@ function iceCreamMint(x, y) {
   translate(x, y);
   noStroke();
   fill(187, 223, 140);
-  ellipse(458, 362, 78, 78);
-  ellipse(429, 397, 30, 30);
-  ellipse(459, 397, 30, 30);
-  ellipse(487, 397, 30, 30);
+  ellipse(x, y, 78, 78);
+  ellipse(x - 29, y + 35, 30, 30);
+  ellipse(x, y + 35, 30, 30);
+  ellipse(x + 29, y + 35, 30, 30);
   pop();
 }
 
@@ -77,10 +92,10 @@ function iceCreamVanilla(x, y) {
   translate(x, y);
   noStroke();
   fill(240, 218, 157);
-  ellipse(458, 362, 78, 78);
-  ellipse(429, 397, 30, 30);
-  ellipse(459, 397, 30, 30);
-  ellipse(487, 397, 30, 30);
+  ellipse(x, y, 78, 78);
+  ellipse(x - 29, y + 35, 30, 30);
+  ellipse(x, y + 35, 30, 30);
+  ellipse(x + 29, y + 35, 30, 30);
   pop();
 }
 
@@ -89,10 +104,10 @@ function iceCreamGrape(x, y) {
   translate(x, y);
   noStroke();
   fill(130, 46, 129);
-  ellipse(458, 362, 78, 78);
-  ellipse(429, 397, 30, 30);
-  ellipse(459, 397, 30, 30);
-  ellipse(487, 397, 30, 30);
+  ellipse(x, y, 78, 78);
+  ellipse(x - 29, y + 35, 30, 30);
+  ellipse(x, y + 35, 30, 30);
+  ellipse(x + 29, y + 35, 30, 30);
   pop();
 }
 
@@ -172,7 +187,7 @@ function lollipopDrawing(x, y) {
   fill(255, 255, 255);
   rect(95, 245, 10, 53, 2);
   pop();
-  
+
   push();
   translate(x, y);
   noStroke();
@@ -237,33 +252,15 @@ function clouds(x, y) {
   pop();
 }
 
-
-/*function draw() {
-  scenery();
-  movingCone();
-  iceCreamStrawberry(50, 50);
-  iceCreamMint(-50, -40);
-  iceCreamGrape(-200, -300);
-  iceCreamVanilla(-150, -200);
-  watermelon();
-  chocolateBar();
-  popcornDrawing();
-  levelPanel();
-  randomIcecreamPattern();
-  lollipopDrawing();
-  screenNextLevel();
-}*/
-
 //start screen
 function startScreen() {
-  
   scenery();
   push();
   noStroke();
   fill(255, 255, 255);
   rect(330, 245, 300, 50, 10);
   pop();
-  
+
   push();
   fill(0, 0, 0);
   textSize(25);
@@ -272,7 +269,7 @@ function startScreen() {
 
   push();
   noFill();
-  stroke (185, 233, 252);
+  stroke(185, 233, 252);
   rect(340, 250, 280, 40, 10);
   pop();
 
@@ -296,8 +293,6 @@ function startScreen() {
   popcornDrawing(1070, -170);
 }
 
-//startScreen();
-
 function instructionsPanel() {
   scenery();
   push();
@@ -315,7 +310,7 @@ function instructionsPanel() {
 
   push();
   noFill();
-  stroke (185, 233, 252);
+  stroke(185, 233, 252);
   rect(275, 385, 90, 40, 10);
   rect(545, 385, 90, 40, 10);
   pop();
@@ -332,8 +327,6 @@ function instructionsPanel() {
   iceCreamCone(0, -50);
 }
 
-//instructionsPanel();
-
 function loseScreen() {
   scenery();
 
@@ -344,16 +337,39 @@ function loseScreen() {
   clouds(660, 140);
   clouds(129, 327);
   clouds(797, -46);
-  
+
   push();
   fill(0, 0, 0);
   textSize(25);
   text("you lost", 430, 230);
   text("better luck next time", 370, 310);
   pop();
-
-  
-
 }
 
-//loseScreen();
+function draw() {
+  scenery();
+  levelPanel();
+  randomIcecreamPattern();
+  //   //instructionsPanel();
+  //   // screenNextLevel();
+  //   // loseScreen();
+  //   // startScreen();
+  movingCone();
+  for (let i = 0; i < itemsFalling.length; i++) {
+    let item = itemsFalling[i];
+    item.y = item.y + item.speed;
+    if (item.y > 560) {
+      item.y = 0;
+      item.x = random(width);
+    }
+    if (item.type === "strawberry") {
+      iceCreamStrawberry(item.x, item.y);
+    } else if (item.type === "mint") {
+      iceCreamMint(item.x, item.y);
+    } else if (item.type === "vanilla") {
+      iceCreamVanilla(item.x, item.y);
+    } else if (item.type === "grape") {
+      iceCreamGrape(item.x, item.y);
+    }
+  }
+}
