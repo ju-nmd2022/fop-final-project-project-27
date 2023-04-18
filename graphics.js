@@ -37,6 +37,7 @@ function iceCreamCone(x, y) {
 function movingCone() {
   iceCreamCone(x, y);
 
+//move the cone with the arrow keys
   x = x + speed;
   if (keyIsDown(39)) {
     speed = 10;
@@ -45,6 +46,13 @@ function movingCone() {
   } else {
     speed = 0;
   }
+  //boundary on both sides of the screen
+  if (x > 450) {
+    x = 450;
+  } else if (x < -415) {
+    x = - 415;
+  }
+ 
 }
 
 //ice cream flavors
@@ -204,10 +212,11 @@ function randomIcecreamPattern() {
   push();
   noStroke();
   fill(255, 255, 255);
-  rect(860, 0, 100, 200, 20);
+  rect(840, 0, 115, 260, 20);
   stroke(190, 225, 230);
   strokeWeight(2);
-  rect(870, 10, 80, 180, 20);
+  noFill();
+  rect(849, 14, 100, 230, 20);
   pop();
 }
 
@@ -237,22 +246,10 @@ function clouds(x, y) {
   pop();
 }
 
-
-/*function draw() {
+function draw() {
   scenery();
   movingCone();
-  iceCreamStrawberry(50, 50);
-  iceCreamMint(-50, -40);
-  iceCreamGrape(-200, -300);
-  iceCreamVanilla(-150, -200);
-  watermelon();
-  chocolateBar();
-  popcornDrawing();
-  levelPanel();
-  randomIcecreamPattern();
-  lollipopDrawing();
-  screenNextLevel();
-}*/
+}
 
 //start screen
 function startScreen() {
@@ -298,7 +295,8 @@ function startScreen() {
 
 //startScreen();
 
-function instructionsPanel() {
+//Instructions screen
+function instructions() {
   scenery();
   push();
   fill(0, 0, 0);
@@ -329,11 +327,17 @@ function instructionsPanel() {
   triangle(604, 404, 576, 393, 577, 415);
   pop();
 
+
+
   iceCreamCone(0, -50);
+  iceCreamCone(440, -240);
+  iceCreamStrawberry(440, -240);
+  iceCreamMint(440, -300);
 }
 
-//instructionsPanel();
+//instructions();
 
+//Losing screen
 function loseScreen() {
   scenery();
 
@@ -347,13 +351,13 @@ function loseScreen() {
   
   push();
   fill(0, 0, 0);
-  textSize(25);
-  text("you lost", 430, 230);
-  text("better luck next time", 370, 310);
+  textSize(45);
+  text("You lose :(", 410, 230);
+  text("Press enter to restart", 310, 310);
   pop();
 
-  
-
+  chocolateBar(-520, 100);
+  watermelon(1300, 200);
 }
 
 //loseScreen();
