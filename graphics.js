@@ -1,5 +1,4 @@
 function scenery() {
-  createCanvas(960, 540);
   background(185, 233, 252);
   clouds();
   clouds(75, 162);
@@ -13,7 +12,9 @@ function scenery() {
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
+// we've got help from Garrit to fix the y position problem
 function setup() {
+  createCanvas(960, 540);
   for (let i = 0; i < 30; i++) {
     let item = {
       x: random(width),
@@ -29,10 +30,13 @@ function setup() {
         "lollipop",
         "watermelon",
       ]),
+      // type: "chocolate",
     };
     itemsFalling.push(item);
   }
+  console.log(itemsFalling);
 }
+
 //Variables
 let x = 100;
 let y = 60;
@@ -159,19 +163,20 @@ function chocolateBar(x, y) {
   stroke(88, 47, 14);
   strokeWeight(2.5);
   fill(127, 79, 36);
-  rect(x, y, 60, 80, 10);
-  rect(x + 8, y + 15, 20, 15, 3);
-  rect(x + 33, y + 15, 20, 15, 3);
-  rect(x + 8, y + 40, 20, 15, 3);
-  rect(x + 33, y + 40, 20, 15, 3);
+  rect(0, 0, 60, 80, 10);
+  rect(8, 15, 20, 15, 3);
+  rect(33, 15, 20, 15, 3);
+  rect(8, 40, 20, 15, 3);
+  rect(33, 40, 20, 15, 3);
   fill(255, 0, 0);
   noStroke();
-  rect(x - 5, y + 60, 70, 45, 10);
+  rect(-5, 60, 70, 45, 10);
   fill(255, 255, 255);
-  rect(x - 5, y + 60, 70, 15, 10);
-  ellipse(x + 10, y + 70, 30, 20);
-  ellipse(x + 30, y + 70, 30, 20);
-  ellipse(x + 50, y + 70, 30, 20);
+  rect(-5, 60, 70, 15, 10);
+  ellipse(10, 70, 30, 20);
+  ellipse(30, 70, 30, 20);
+  ellipse(50, 70, 30, 20);
+  pop();
 }
 
 //popcorn drawing
@@ -253,7 +258,7 @@ function randomIcecreamPattern() {
 //next level screen
 function screenNextLevel() {
   scenery();
-  
+
   push();
   noStroke();
   fill(202, 186, 219);
@@ -345,8 +350,6 @@ function instructions() {
   text("Follow the pattern shown to move on to the next level ➡️", 375, 127);
   pop();
 
-  
-
   push();
   fill(255, 255, 255);
   noStroke();
@@ -394,7 +397,7 @@ function loseScreen() {
   fill(202, 186, 219);
   stroke(255, 255, 255);
   rect(365, 185, 300, 60, 9);
-  
+
   pop();
 
   push();
@@ -408,7 +411,7 @@ function loseScreen() {
 }
 //loseScreen();
 
-/*function draw() {
+function draw() {
   scenery();
   //   //instructionsPanel();
   //   // screenNextLevel();
@@ -417,6 +420,14 @@ function loseScreen() {
   levelPanel();
   randomIcecreamPattern();
   movingCone();
+
+  // iceCreamStrawberry(100, 100);
+  // iceCreamMint(200, 100);
+  // iceCreamVanilla(300, 100);
+  // iceCreamGrape(100, 200);
+  // watermelon(200, 200);
+  // chocolateBar(300, 200);
+
   for (let i = 0; i < itemsFalling.length; i++) {
     let item = itemsFalling[i];
     item.y = item.y + item.speed;
@@ -438,4 +449,4 @@ function loseScreen() {
       chocolateBar(item.x, item.y);
     }
   }
-}*/
+}
