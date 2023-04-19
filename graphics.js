@@ -252,8 +252,11 @@ function randomIcecreamPattern() {
 
 //next level screen
 function screenNextLevel() {
+  scenery();
+  
   push();
-  fill(190, 225, 230);
+  noStroke();
+  fill(202, 186, 219);
   rect(380, 240, 200, 80, 20);
   stroke(255, 255, 255);
   strokeWeight(2);
@@ -262,8 +265,10 @@ function screenNextLevel() {
   textSize(30);
   fill(255, 255, 255);
   text("Next level🍦", 400, 290);
+  clouds(313, 70);
   pop();
 }
+screenNextLevel();
 
 function clouds(x, y) {
   push();
@@ -317,16 +322,30 @@ function startScreen() {
   popcornDrawing(1070, -170);
 }
 
-startScreen();
+//startScreen();
 
 //Instructions screen
 function instructions() {
   scenery();
+
   push();
-  fill(0, 0, 0);
+  fill(202, 186, 219);
+  rect(370, 95, 460, 50, 9);
+  rect(220, 248, 500, 48, 9);
+  stroke(255, 255, 255);
+  rect(370, 95, 460, 50, 9);
+  rect(220, 248, 500, 48, 9);
+  pop();
+
+  push();
+  fill(255, 255, 255);
   textSize(25);
   text("Move the cone with the left and right arrows", 230, 280);
+  textSize(18);
+  text("Follow the pattern shown to move on to the next level ➡️", 375, 127);
   pop();
+
+  
 
   push();
   fill(255, 255, 255);
@@ -372,17 +391,24 @@ function loseScreen() {
   clouds(797, -46);
 
   push();
-  fill(0, 0, 0);
+  fill(202, 186, 219);
+  stroke(255, 255, 255);
+  rect(365, 185, 300, 60, 9);
+  
+  pop();
+
+  push();
+  fill(255, 255, 255);
   textSize(45);
-  text("You lose :(", 410, 230);
-  text("Press enter to restart", 310, 310);
+  text("Try again 🥺", 400, 230);
   pop();
 
   chocolateBar(-520, 100);
   watermelon(1300, 200);
 }
+//loseScreen();
 
-function draw() {
+/*function draw() {
   scenery();
   //   //instructionsPanel();
   //   // screenNextLevel();
@@ -412,4 +438,4 @@ function draw() {
       chocolateBar(item.x, item.y);
     }
   }
-}
+}*/
