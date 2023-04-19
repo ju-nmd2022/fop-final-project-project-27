@@ -8,19 +8,27 @@ function scenery() {
   clouds(660, 140);
   clouds(129, 327);
   clouds(797, -46);
-
 }
 
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
 function setup() {
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 30; i++) {
     let item = {
       x: random(width),
-      y: random(0, -2, -5, -20),
+      y: 0,
       speed: random(1, 2, 3),
-      type: random(["strawberry", "mint", "vanilla", "grape"]),
+      type: random([
+        "strawberry",
+        "mint",
+        "vanilla",
+        "grape",
+        "chocolate",
+        "popcorn",
+        "lollipop",
+        "watermelon",
+      ]),
     };
     itemsFalling.push(item);
   }
@@ -60,12 +68,12 @@ function iceCreamCone(x, y) {
 function movingCone() {
   iceCreamCone(x, y);
 
-//move the cone with the arrow keys
+  //move the cone with the arrow keys
   x = x + speed;
   if (keyIsDown(39)) {
     speed = 15;
   } else if (keyIsDown(37)) {
-    speed = - 10;
+    speed = -10;
   } else {
     speed = 0;
   }
@@ -73,9 +81,8 @@ function movingCone() {
   if (x > 450) {
     x = 450;
   } else if (x < -415) {
-    x = - 415;
+    x = -415;
   }
- 
 }
 
 //ice cream flavors
@@ -132,17 +139,17 @@ function watermelon(x, y) {
   translate(x, y);
   noStroke();
   fill(82, 183, 136);
-  arc(100, 100, 100, 100, 0, PI, OPEN);
+  arc(x, y, 100, 100, 0, PI, OPEN);
   fill(249, 65, 68);
-  arc(100, 100, 85, 85, 0, PI, OPEN);
+  arc(x, y, 85, 85, 0, PI, OPEN);
   fill(0, 0, 0);
-  ellipse(80, 110, 3, 5);
-  ellipse(95, 120, 3, 5);
-  ellipse(110, 110, 3, 5);
-  ellipse(125, 120, 3, 5);
-  ellipse(110, 130, 3, 5);
-  ellipse(85, 130, 3, 5);
-  ellipse(73, 120, 3, 5);
+  ellipse(x - 20, y + 10, 3, 5);
+  ellipse(x - 5, y + 20, 3, 5);
+  ellipse(x + 10, y + 10, 3, 5);
+  ellipse(x + 25, y + 20, 3, 5);
+  ellipse(x + 10, y + 30, 3, 5);
+  ellipse(x - 15, y + 30, 3, 5);
+  ellipse(x - 27, y + 20, 3, 5);
   pop();
 }
 
@@ -152,19 +159,19 @@ function chocolateBar(x, y) {
   stroke(88, 47, 14);
   strokeWeight(2.5);
   fill(127, 79, 36);
-  rect(600, 130, 60, 80, 10);
-  rect(608, 145, 20, 15, 3);
-  rect(633, 145, 20, 15, 3);
-  rect(608, 170, 20, 15, 3);
-  rect(633, 170, 20, 15, 3);
+  rect(x, y, 60, 80, 10);
+  rect(x + 8, y + 15, 20, 15, 3);
+  rect(x + 33, y + 15, 20, 15, 3);
+  rect(x + 8, y + 40, 20, 15, 3);
+  rect(x + 33, y + 40, 20, 15, 3);
   fill(255, 0, 0);
   noStroke();
-  rect(595, 190, 70, 45, 10);
+  rect(x - 5, y + 60, 70, 45, 10);
   fill(255, 255, 255);
-  rect(595, 190, 70, 15, 10);
-  ellipse(610, 200, 30, 20);
-  ellipse(630, 200, 30, 20);
-  ellipse(650, 200, 30, 20);
+  rect(x - 5, y + 60, 70, 15, 10);
+  ellipse(x + 10, y + 70, 30, 20);
+  ellipse(x + 30, y + 70, 30, 20);
+  ellipse(x + 50, y + 70, 30, 20);
 }
 
 //popcorn drawing
@@ -344,8 +351,6 @@ function instructions() {
   triangle(604, 404, 576, 393, 577, 415);
   pop();
 
-
-
   iceCreamCone(0, -50);
   iceCreamCone(440, -240);
   iceCreamStrawberry(440, -240);
@@ -383,7 +388,8 @@ function draw() {
   //   // screenNextLevel();
   //   // loseScreen();
   //   // startScreen();
-
+  levelPanel();
+  randomIcecreamPattern();
   movingCone();
   for (let i = 0; i < itemsFalling.length; i++) {
     let item = itemsFalling[i];
@@ -400,6 +406,10 @@ function draw() {
       iceCreamVanilla(item.x, item.y);
     } else if (item.type === "grape") {
       iceCreamGrape(item.x, item.y);
+    } else if (item.type === "watermelon") {
+      watermelon(item.x, item.y);
+    } else if (item.type === "chocolate") {
+      chocolateBar(item.x, item.y);
     }
   }
 }
