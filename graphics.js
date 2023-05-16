@@ -1,3 +1,5 @@
+import { Cone } from "./cone";
+
 function scenery() {
   background(185, 233, 252);
   clouds();
@@ -8,13 +10,14 @@ function scenery() {
   clouds(129, 327);
   clouds(797, -46);
 }
-
+let cone;
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
 // we've got help from Garrit to fix the y position problem
 function setup() {
   createCanvas(960, 540);
+  cone = new Cone(200, 230);
 
   /*Help from karl, lab assistant
   // our first array was random, not all items were falling.
@@ -70,50 +73,50 @@ let speed = 0;
 let itemsFalling = [];
 
 //Ice cream cone drawing
-function iceCreamCone(x, y) {
-  push();
-  translate(x, y);
-  strokeWeight(2.5);
-  stroke(248, 171, 93);
-  fill(243, 201, 139);
-  triangle(420, 400, 460, 480, 500, 400);
+// function iceCreamCone(x, y) {
+//   push();
+//   translate(x, y);
+//   strokeWeight(2.5);
+//   stroke(248, 171, 93);
+//   fill(243, 201, 139);
+//   triangle(420, 400, 460, 480, 500, 400);
 
-  //lines of the cone
-  line(430, 400, 465, 470);
-  line(440, 400, 470, 457);
-  line(450, 400, 475, 445);
-  line(460, 400, 480, 436);
-  line(470, 400, 485, 425);
-  line(480, 400, 492, 417);
+//   //lines of the cone
+//   line(430, 400, 465, 470);
+//   line(440, 400, 470, 457);
+//   line(450, 400, 475, 445);
+//   line(460, 400, 480, 436);
+//   line(470, 400, 485, 425);
+//   line(480, 400, 492, 417);
 
-  line(490, 400, 455, 470);
-  line(480, 400, 450, 460);
-  line(470, 400, 445, 450);
-  line(460, 400, 440, 440);
-  line(450, 400, 435, 430);
-  line(440, 400, 430, 420);
-  pop();
-}
+//   line(490, 400, 455, 470);
+//   line(480, 400, 450, 460);
+//   line(470, 400, 445, 450);
+//   line(460, 400, 440, 440);
+//   line(450, 400, 435, 430);
+//   line(440, 400, 430, 420);
+//   pop();
+// }
 
-function movingCone() {
-  iceCreamCone(x, y);
+// function movingCone() {
+//   iceCreamCone(x, y);
 
-  //move the cone with the arrow keys
-  x = x + speed;
-  if (keyIsDown(39)) {
-    speed = 15;
-  } else if (keyIsDown(37)) {
-    speed = -10;
-  } else {
-    speed = 0;
-  }
-  //boundary on both sides of the screen
-  if (x > 450) {
-    x = 450;
-  } else if (x < -415) {
-    x = -415;
-  }
-}
+//   //move the cone with the arrow keys
+//   x = x + speed;
+//   if (keyIsDown(39)) {
+//     speed = 15;
+//   } else if (keyIsDown(37)) {
+//     speed = -10;
+//   } else {
+//     speed = 0;
+//   }
+//   //boundary on both sides of the screen
+//   if (x > 450) {
+//     x = 450;
+//   } else if (x < -415) {
+//     x = -415;
+//   }
+// }
 
 //ice cream flavors
 function iceCreamStrawberry(x, y) {
@@ -444,7 +447,9 @@ function draw() {
   //   // startScreen();
   levelPanel();
   randomIcecreamPattern();
-  movingCone();
+  cone.show();
+  cone.moving();
+  // movingCone();
 
   // iceCreamStrawberry(100, 100);
   // iceCreamMint(200, 100);
