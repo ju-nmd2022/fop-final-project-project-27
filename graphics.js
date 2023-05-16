@@ -15,9 +15,35 @@ function scenery() {
 // we've got help from Garrit to fix the y position problem
 function setup() {
   createCanvas(960, 540);
-  for (let i = 0; i < 30; i++) {
+
+  /*Help from karl, lab assistant
+  // our first array was random, not all items were falling.
+  //we needed at least one of all items falling, the first array
+  is to make sure that at least one of each item will fall
+  */
+  let flavours = [
+    "strawberry",
+    "mint",
+    "vanilla",
+    "grape",
+    "chocolate",
+    // "popcorn",
+    // "lollipop",
+    "watermelon",
+  ];
+  for (let flavour of flavours) {
     let item = {
-      x: random(width),
+      x: random(width - 10),
+      y: 0,
+      speed: random(1, 2, 3),
+      type: flavour,
+    };
+    // console.log(flavours);
+    itemsFalling.push(item);
+  }
+  for (let i = 0; i < 10; i++) {
+    let item = {
+      x: random(width - 10),
       y: 0,
       speed: random(1, 2, 3),
       type: random([
@@ -26,15 +52,15 @@ function setup() {
         "vanilla",
         "grape",
         "chocolate",
-        "popcorn",
-        "lollipop",
+        // "popcorn",
+        // "lollipop",
         "watermelon",
       ]),
-      // type: "chocolate",
     };
     itemsFalling.push(item);
+    console.log(item.type);
   }
-  console.log(itemsFalling);
+  // console.log(itemsFalling);
 }
 
 //Variables
@@ -409,7 +435,6 @@ function loseScreen() {
   chocolateBar(-520, 100);
   watermelon(1300, 200);
 }
-//loseScreen();
 
 function draw() {
   scenery();
@@ -449,4 +474,6 @@ function draw() {
       chocolateBar(item.x, item.y);
     }
   }
+
+  // console.log(itemsFalling);
 }
