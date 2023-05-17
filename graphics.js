@@ -1,4 +1,5 @@
 import { Cone } from "./cone";
+import { iceCream} from "./icecream";
 
 function scenery() {
   background(185, 233, 252);
@@ -71,6 +72,7 @@ let x = 100;
 let y = 60;
 let speed = 0;
 let itemsFalling = [];
+
 
 //Ice cream cone drawing
 // function iceCreamCone(x, y) {
@@ -480,5 +482,11 @@ function draw() {
     }
   }
 
+
   // console.log(itemsFalling);
 }
+const myIceCream = new IceCream(0, 0);
+const randomFlavor = myIceCream.getRandomFlavor();
+
+console.log(randomFlavor); // Output: Randomly selected ice cream flavor
+
