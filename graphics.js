@@ -1,5 +1,5 @@
 import { Cone } from "./cone";
-import { iceCream} from "./icecream";
+import { IceCream } from "./icecream";
 
 function scenery() {
   background(185, 233, 252);
@@ -12,6 +12,7 @@ function scenery() {
   clouds(797, -46);
 }
 let cone;
+let iceCream;
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
@@ -19,52 +20,53 @@ let cone;
 function setup() {
   createCanvas(960, 540);
   cone = new Cone(200, 230);
+  iceCream = new IceCream(300, 200);
 
   /*Help from karl, lab assistant
   // our first array was random, not all items were falling.
   //we needed at least one of all items falling, the first array
   is to make sure that at least one of each item will fall
   */
-  let flavours = [
-    "strawberry",
-    "mint",
-    "vanilla",
-    "grape",
-    "chocolate",
-    // "popcorn",
-    // "lollipop",
-    "watermelon",
-  ];
-  for (let flavour of flavours) {
-    let item = {
-      x: random(width - 10),
-      y: 0,
-      speed: random(1, 2, 3),
-      type: flavour,
-    };
-    // console.log(flavours);
-    itemsFalling.push(item);
-  }
-  for (let i = 0; i < 10; i++) {
-    let item = {
-      x: random(width - 10),
-      y: 0,
-      speed: random(1, 2, 3),
-      type: random([
-        "strawberry",
-        "mint",
-        "vanilla",
-        "grape",
-        "chocolate",
-        // "popcorn",
-        // "lollipop",
-        "watermelon",
-      ]),
-    };
-    itemsFalling.push(item);
-    console.log(item.type);
-  }
-  // console.log(itemsFalling);
+  // let flavours = [
+  //   "strawberry",
+  //   "mint",
+  //   "vanilla",
+  //   "grape",
+  //   "chocolate",
+  //   // "popcorn",
+  //   // "lollipop",
+  //   "watermelon",
+  // ];
+  //   for (let flavour of iceCream.flavors) {
+  //     let item = {
+  //       x: random(width - 10),
+  //       y: 0,
+  //       speed: random(1, 2, 3),
+  //       type: flavour,
+  //     };
+  //     // console.log(flavours);
+  //     itemsFalling.push(item);
+  //   }
+  //   for (let i = 0; i < 10; i++) {
+  //     let item = {
+  //       x: random(width - 10),
+  //       y: 0,
+  //       speed: random(1, 2, 3),
+  //       type: random([
+  //         "strawberry",
+  //         "mint",
+  //         "vanilla",
+  //         "grape",
+  //         "chocolate",
+  //         // "popcorn",
+  //         // "lollipop",
+  //         "watermelon",
+  //       ]),
+  //     };
+  //     itemsFalling.push(item);
+  //     console.log(item.type);
+  //   }
+  //   console.log(itemsFalling);
 }
 
 //Variables
@@ -72,7 +74,6 @@ let x = 100;
 let y = 60;
 let speed = 0;
 let itemsFalling = [];
-
 
 //Ice cream cone drawing
 // function iceCreamCone(x, y) {
@@ -121,146 +122,146 @@ let itemsFalling = [];
 // }
 
 //ice cream flavors
-function iceCreamStrawberry(x, y) {
-  push();
-  translate(x, y);
-  noStroke();
-  fill(255, 0, 110);
-  ellipse(x, y, 78, 78);
-  ellipse(x - 29, y + 35, 30, 30);
-  ellipse(x, y + 35, 30, 30);
-  ellipse(x + 29, y + 35, 30, 30);
-  pop();
-}
+// function iceCreamStrawberry(x, y) {
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(255, 0, 110);
+//   ellipse(x, y, 78, 78);
+//   ellipse(x - 29, y + 35, 30, 30);
+//   ellipse(x, y + 35, 30, 30);
+//   ellipse(x + 29, y + 35, 30, 30);
+//   pop();
+// }
 
-function iceCreamMint(x, y) {
-  push();
-  translate(x, y);
-  noStroke();
-  fill(187, 223, 140);
-  ellipse(x, y, 78, 78);
-  ellipse(x - 29, y + 35, 30, 30);
-  ellipse(x, y + 35, 30, 30);
-  ellipse(x + 29, y + 35, 30, 30);
-  pop();
-}
+// function iceCreamMint(x, y) {
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(187, 223, 140);
+//   ellipse(x, y, 78, 78);
+//   ellipse(x - 29, y + 35, 30, 30);
+//   ellipse(x, y + 35, 30, 30);
+//   ellipse(x + 29, y + 35, 30, 30);
+//   pop();
+// }
 
-function iceCreamVanilla(x, y) {
-  push();
-  translate(x, y);
-  noStroke();
-  fill(240, 218, 157);
-  ellipse(x, y, 78, 78);
-  ellipse(x - 29, y + 35, 30, 30);
-  ellipse(x, y + 35, 30, 30);
-  ellipse(x + 29, y + 35, 30, 30);
-  pop();
-}
+// function iceCreamVanilla(x, y) {
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(240, 218, 157);
+//   ellipse(x, y, 78, 78);
+//   ellipse(x - 29, y + 35, 30, 30);
+//   ellipse(x, y + 35, 30, 30);
+//   ellipse(x + 29, y + 35, 30, 30);
+//   pop();
+// }
 
-function iceCreamGrape(x, y) {
-  push();
-  translate(x, y);
-  noStroke();
-  fill(130, 46, 129);
-  ellipse(x, y, 78, 78);
-  ellipse(x - 29, y + 35, 30, 30);
-  ellipse(x, y + 35, 30, 30);
-  ellipse(x + 29, y + 35, 30, 30);
-  pop();
-}
+// function iceCreamGrape(x, y) {
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(130, 46, 129);
+//   ellipse(x, y, 78, 78);
+//   ellipse(x - 29, y + 35, 30, 30);
+//   ellipse(x, y + 35, 30, 30);
+//   ellipse(x + 29, y + 35, 30, 30);
+//   pop();
+// }
 
-function watermelon(x, y) {
-  push();
-  translate(x, y);
-  noStroke();
-  fill(82, 183, 136);
-  arc(x, y, 100, 100, 0, PI, OPEN);
-  fill(249, 65, 68);
-  arc(x, y, 85, 85, 0, PI, OPEN);
-  fill(0, 0, 0);
-  ellipse(x - 20, y + 10, 3, 5);
-  ellipse(x - 5, y + 20, 3, 5);
-  ellipse(x + 10, y + 10, 3, 5);
-  ellipse(x + 25, y + 20, 3, 5);
-  ellipse(x + 10, y + 30, 3, 5);
-  ellipse(x - 15, y + 30, 3, 5);
-  ellipse(x - 27, y + 20, 3, 5);
-  pop();
-}
+// function watermelon(x, y) {
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(82, 183, 136);
+//   arc(x, y, 100, 100, 0, PI, OPEN);
+//   fill(249, 65, 68);
+//   arc(x, y, 85, 85, 0, PI, OPEN);
+//   fill(0, 0, 0);
+//   ellipse(x - 20, y + 10, 3, 5);
+//   ellipse(x - 5, y + 20, 3, 5);
+//   ellipse(x + 10, y + 10, 3, 5);
+//   ellipse(x + 25, y + 20, 3, 5);
+//   ellipse(x + 10, y + 30, 3, 5);
+//   ellipse(x - 15, y + 30, 3, 5);
+//   ellipse(x - 27, y + 20, 3, 5);
+//   pop();
+// }
 
-function chocolateBar(x, y) {
-  push();
-  translate(x, y);
-  stroke(88, 47, 14);
-  strokeWeight(2.5);
-  fill(127, 79, 36);
-  rect(0, 0, 60, 80, 10);
-  rect(8, 15, 20, 15, 3);
-  rect(33, 15, 20, 15, 3);
-  rect(8, 40, 20, 15, 3);
-  rect(33, 40, 20, 15, 3);
-  fill(255, 0, 0);
-  noStroke();
-  rect(-5, 60, 70, 45, 10);
-  fill(255, 255, 255);
-  rect(-5, 60, 70, 15, 10);
-  ellipse(10, 70, 30, 20);
-  ellipse(30, 70, 30, 20);
-  ellipse(50, 70, 30, 20);
-  pop();
-}
+// function chocolateBar(x, y) {
+//   push();
+//   translate(x, y);
+//   stroke(88, 47, 14);
+//   strokeWeight(2.5);
+//   fill(127, 79, 36);
+//   rect(0, 0, 60, 80, 10);
+//   rect(8, 15, 20, 15, 3);
+//   rect(33, 15, 20, 15, 3);
+//   rect(8, 40, 20, 15, 3);
+//   rect(33, 40, 20, 15, 3);
+//   fill(255, 0, 0);
+//   noStroke();
+//   rect(-5, 60, 70, 45, 10);
+//   fill(255, 255, 255);
+//   rect(-5, 60, 70, 15, 10);
+//   ellipse(10, 70, 30, 20);
+//   ellipse(30, 70, 30, 20);
+//   ellipse(50, 70, 30, 20);
+//   pop();
+// }
 
-//popcorn drawing
-function popcornDrawing(x, y) {
-  push();
-  translate(x, y);
-  noStroke();
-  fill(255, 225, 145);
-  ellipse(100, 100, 20);
-  ellipse(115, 93, 20);
-  ellipse(132, 95, 20);
-  ellipse(149, 91, 25);
-  ellipse(167, 94, 20);
-  ellipse(130, 77, 25);
-  ellipse(151, 76, 20);
-  ellipse(108, 78, 23);
-  pop();
+// //popcorn drawing
+// function popcornDrawing(x, y) {
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(255, 225, 145);
+//   ellipse(100, 100, 20);
+//   ellipse(115, 93, 20);
+//   ellipse(132, 95, 20);
+//   ellipse(149, 91, 25);
+//   ellipse(167, 94, 20);
+//   ellipse(130, 77, 25);
+//   ellipse(151, 76, 20);
+//   ellipse(108, 78, 23);
+//   pop();
 
-  push();
-  translate(x, y);
-  noStroke();
-  rect(100, 100, 15, 80);
-  rect(129, 100, 15, 80);
-  rect(155, 100, 15, 80);
-  fill(255, 0, 0);
-  rect(114, 100, 15, 80);
-  rect(144, 100, 15, 80);
-  pop();
-}
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   rect(100, 100, 15, 80);
+//   rect(129, 100, 15, 80);
+//   rect(155, 100, 15, 80);
+//   fill(255, 0, 0);
+//   rect(114, 100, 15, 80);
+//   rect(144, 100, 15, 80);
+//   pop();
+// }
 
-//lollipop drawing
-function lollipopDrawing(x, y) {
-  push();
-  translate(x, y);
-  noStroke();
-  fill(255, 255, 255);
-  rect(95, 245, 10, 53, 2);
-  pop();
+// //lollipop drawing
+// function lollipopDrawing(x, y) {
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(255, 255, 255);
+//   rect(95, 245, 10, 53, 2);
+//   pop();
 
-  push();
-  translate(x, y);
-  noStroke();
-  fill(225, 18, 153);
-  ellipse(100, 231, 40);
-  pop();
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(225, 18, 153);
+//   ellipse(100, 231, 40);
+//   pop();
 
-  push();
-  translate(x, y);
-  noStroke();
-  fill(255, 95, 158);
-  rect(78, 227, 44, 10, 5);
-  pop();
-}
+//   push();
+//   translate(x, y);
+//   noStroke();
+//   fill(255, 95, 158);
+//   rect(78, 227, 44, 10, 5);
+//   pop();
+// }
 
 //level panel
 function levelPanel() {
@@ -451,6 +452,13 @@ function draw() {
   randomIcecreamPattern();
   cone.show();
   cone.moving();
+  iceCream.show();
+  iceCream.moving();
+
+  if (cone.catches(iceCream)) {
+    console.log("hello");
+  }
+
   // movingCone();
 
   // iceCreamStrawberry(100, 100);
@@ -460,33 +468,31 @@ function draw() {
   // watermelon(200, 200);
   // chocolateBar(300, 200);
 
-  for (let i = 0; i < itemsFalling.length; i++) {
-    let item = itemsFalling[i];
-    item.y = item.y + item.speed;
-    if (item.y > 560) {
-      item.y = 0;
-      item.x = random(width);
-    }
-    if (item.type === "strawberry") {
-      iceCreamStrawberry(item.x, item.y);
-    } else if (item.type === "mint") {
-      iceCreamMint(item.x, item.y);
-    } else if (item.type === "vanilla") {
-      iceCreamVanilla(item.x, item.y);
-    } else if (item.type === "grape") {
-      iceCreamGrape(item.x, item.y);
-    } else if (item.type === "watermelon") {
-      watermelon(item.x, item.y);
-    } else if (item.type === "chocolate") {
-      chocolateBar(item.x, item.y);
-    }
-  }
-
+  // for (let i = 0; i < itemsFalling.length; i++) {
+  //   let item = itemsFalling[i];
+  //   item.y = item.y + item.speed;
+  //   if (item.y > 560) {
+  //     item.y = 0;
+  //     item.x = random(width);
+  //   }
+  //   if (item.type === "strawberry") {
+  //     iceCreamStrawberry(item.x, item.y);
+  //   } else if (item.type === "mint") {
+  //     iceCreamMint(item.x, item.y);
+  //   } else if (item.type === "vanilla") {
+  //     iceCreamVanilla(item.x, item.y);
+  //   } else if (item.type === "grape") {
+  //     iceCreamGrape(item.x, item.y);
+  //   } else if (item.type === "watermelon") {
+  //     watermelon(item.x, item.y);
+  //   } else if (item.type === "chocolate") {
+  //     chocolateBar(item.x, item.y);
+  //   }
+  // }
 
   // console.log(itemsFalling);
 }
-const myIceCream = new IceCream(0, 0);
-const randomFlavor = myIceCream.getRandomFlavor();
+// const myIceCream = new IceCream(0, 0);
+// const randomFlavor = myIceCream.getRandomFlavor();
 
-console.log(randomFlavor); // Output: Randomly selected ice cream flavor
-
+// console.log(randomFlavor); // Output: Randomly selected ice cream flavor
