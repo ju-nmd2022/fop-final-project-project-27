@@ -12,6 +12,7 @@ function scenery() {
   clouds(797, -46);
 }
 
+
 let cone;
 let iceCreams = [];
 // https://happycoding.io/tutorials/p5js/arrays
@@ -411,7 +412,7 @@ function draw() {
   // we had help from karl during the labs to structure the array and loop
 
   //5% of the time the new ice cream will be added
-  if (random(1) < 0.05) {
+  if (random(1) < 0.03) {
     iceCreams.push(new IceCream(random(width), random(-100, -20)));
   }
 
