@@ -1,5 +1,5 @@
 // export default class IceCream {
-//   constructor(x, y, flavor) {
+//   constructor(x, y, flavors) {
 //     this.x = x;
 //     this.y = y;
 //   }
@@ -19,10 +19,9 @@
 // }
 
 export class IceCream {
-  constructor(x, y, flavor) {
+  constructor(x, y, flavors) {
     this.x = x;
     this.y = y;
-    this.flavor = flavor;
     this.flavors = [
       "Vanilla",
       "Grape",
@@ -31,12 +30,13 @@ export class IceCream {
       "Cookies and Cream",
     ];
     this.color = [0, 0, 0];
+    this.size = 80;
   }
 
-  getRandomFlavor() {
-    const randomIndex = Math.floor(Math.random() * this.flavors.length);
-    return this.flavors[randomIndex];
-  }
+  // getRandomFlavor() {
+  //   const randomIndex = Math.floor(Math.random() * this.flavors.length);
+  //   return this.flavors[randomIndex];
+  // }
 
   show() {
     push();
@@ -48,27 +48,39 @@ export class IceCream {
     ellipse(0, 35, 30, 30);
     ellipse(29, 35, 30, 30);
     pop();
-  }
 
-  setColor(color) {
-    this.color = color;
-  }
-
-  setColorBasedOnFlavor() {
-    if (this.flavor === "Strawberry") {
-      this.setColor([255, 0, 0]);
-    } else if (this.flavor === "Vanilla") {
-      this.setColor([240, 218, 157]);
-    } else if (this.flavor === "Grape") {
-      this.setColor([130, 46, 129]);
-    } else if (this.flavor === "Mint Chocolate Chip") {
-      this.setColor([187, 223, 140]);
-    } else if (this.flavor === "Cookies and Cream") {
-      this.setColor([0, 0, 0]);
+    if (this.flavors === "Strawberry") {
+      this.color([255, 0, 0]);
+    } else if (this.flavors === "Vanilla") {
+      this.color([240, 218, 157]);
+    } else if (this.flavors === "Grape") {
+      this.color([130, 46, 129]);
+    } else if (this.flavors === "Mint Chocolate Chip") {
+      this.color([187, 223, 140]);
+    } else if (this.flavors === "Cookies and Cream") {
+      this.color([0, 0, 0]);
     }
   }
 
+  // color(color) {
+  //   this.color = color;
+  // }
+
+  // setColorBasedOnFlavor() {
+  //   if (this.flavors === "Strawberry") {
+  //     this.color([255, 0, 0]);
+  //   } else if (this.flavors === "Vanilla") {
+  //     this.color([240, 218, 157]);
+  //   } else if (this.flavors === "Grape") {
+  //     this.color([130, 46, 129]);
+  //   } else if (this.flavors === "Mint Chocolate Chip") {
+  //     this.color([187, 223, 140]);
+  //   } else if (this.flavors === "Cookies and Cream") {
+  //     this.color([0, 0, 0]);
+  //   }
+  // }
+
   moving() {
-    this.y = this.y + 2;
+    this.y = this.y + 3;
   }
 }

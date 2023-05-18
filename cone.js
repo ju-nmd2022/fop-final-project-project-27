@@ -8,7 +8,7 @@ export class Cone {
   }
   show() {
     push();
-    translate(this.x, this.y);
+    // translate(this.x, this.y);
     strokeWeight(2.5);
     stroke(248, 171, 93);
     fill(243, 201, 139);
@@ -47,18 +47,44 @@ export class Cone {
       this.s = 0;
     }
 
-    if (this.x > 430) {
-      this.x = 430;
+    if (this.x > 850) {
+      this.x = 850;
     } else if (this.x < -10) {
       this.x = -10;
     }
     // boundary on both sides of the screen
   }
+  // catches(iceCream) {
+  //   if (
+  //     iceCream.y >= this.y - 20 &&
+  //     iceCream.x > this.x - this.w / 2 &&
+  //     iceCream.x < this.w / 2
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
+
+  // Help from Eveline during the labs
+  // debug with chatgpt with the cone position problem
+
   catches(iceCream) {
+    const coneTopY = this.y + 30;
+    const coneBottomY = this.y + 80;
+    const coneLeftX = this.x + 50;
+    const coneRightX = this.x + 60;
+
+    const iceCreamTopY = iceCream.y;
+    const iceCreamBottomY = iceCream.y + iceCream.size;
+    const iceCreamLeftX = iceCream.x - iceCream.size / 2;
+    const iceCreamRightX = iceCream.x + iceCream.size / 2;
+
     if (
-      iceCream.y >= this.y * 2 &&
-      (iceCream.x + 100) / 2 > this.x &&
-      (iceCream.x + 100) / 2 < this.w
+      iceCreamBottomY >= coneTopY &&
+      iceCreamTopY <= coneBottomY &&
+      iceCreamRightX >= coneLeftX &&
+      iceCreamLeftX <= coneRightX
     ) {
       return true;
     } else {

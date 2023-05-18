@@ -11,69 +11,23 @@ function scenery() {
   clouds(129, 327);
   clouds(797, -46);
 }
+
 let cone;
-let iceCream;
+let iceCreams = [];
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
 // we've got help from Garrit to fix the y position problem
 function setup() {
   createCanvas(960, 540);
-  cone = new Cone(200, 230);
-  iceCream = new IceCream(300, 200);
-
-  /*Help from karl, lab assistant
-  // our first array was random, not all items were falling.
-  //we needed at least one of all items falling, the first array
-  is to make sure that at least one of each item will fall
-  */
-  // let flavours = [
-  //   "strawberry",
-  //   "mint",
-  //   "vanilla",
-  //   "grape",
-  //   "chocolate",
-  //   // "popcorn",
-  //   // "lollipop",
-  //   "watermelon",
-  // ];
-  //   for (let flavour of iceCream.flavors) {
-  //     let item = {
-  //       x: random(width - 10),
-  //       y: 0,
-  //       speed: random(1, 2, 3),
-  //       type: flavour,
-  //     };
-  //     // console.log(flavours);
-  //     itemsFalling.push(item);
-  //   }
-  //   for (let i = 0; i < 10; i++) {
-  //     let item = {
-  //       x: random(width - 10),
-  //       y: 0,
-  //       speed: random(1, 2, 3),
-  //       type: random([
-  //         "strawberry",
-  //         "mint",
-  //         "vanilla",
-  //         "grape",
-  //         "chocolate",
-  //         // "popcorn",
-  //         // "lollipop",
-  //         "watermelon",
-  //       ]),
-  //     };
-  //     itemsFalling.push(item);
-  //     console.log(item.type);
-  //   }
-  //   console.log(itemsFalling);
+  cone = new Cone(450, 460);
 }
 
 //Variables
 let x = 100;
 let y = 60;
 let speed = 0;
-let itemsFalling = [];
+// let itemsFalling = [];
 
 //Ice cream cone drawing
 // function iceCreamCone(x, y) {
@@ -452,13 +406,31 @@ function draw() {
   randomIcecreamPattern();
   cone.show();
   cone.moving();
-  iceCream.show();
-  iceCream.moving();
 
-  if (cone.catches(iceCream)) {
-    console.log("hello");
+  // https://www.youtube.com/watch?v=_H9JIwWP7HQ
+  // we had help from karl during the labs to structure the array and loop
+
+  //5% of the time the new ice cream will be added
+  if (random(1) < 0.05) {
+    iceCreams.push(new IceCream(random(width), random(-100, -20)));
   }
 
+  for (let iceCream of iceCreams) {
+    iceCream.show();
+    iceCream.moving();
+  }
+
+  //loop to take things backwards from the array
+  for (let i = iceCreams.length - 1; i >= 0; i--) {
+    if (cone.catches(iceCreams[i])) {
+      iceCreams.splice(i, 1);
+      console.log("hello");
+    } else if (iceCreams[i].y > height + 10) {
+      iceCreams.splice(i, 1);
+    }
+  }
+
+  // console.log(iceCreams.length);
   // movingCone();
 
   // iceCreamStrawberry(100, 100);
