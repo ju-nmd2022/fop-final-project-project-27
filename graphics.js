@@ -12,7 +12,6 @@ function scenery() {
   clouds(797, -46);
 }
 
-
 let cone;
 let iceCreams = [];
 // https://happycoding.io/tutorials/p5js/arrays

@@ -1,56 +1,19 @@
-// export default class IceCream {
-//   constructor(x, y, flavors) {
-//     this.x = x;
-//     this.y = y;
-//   }
-
-//   getRandomFlavor() {
-//     const flavors = [
-//       "Vanilla",
-//       "Chocolate",
-//       "Strawberry",
-//       "Mint Chocolate Chip",
-//       "Cookies and Cream",
-//     ];
-
-//     const randomIndex = Math.floor(Math.random() * flavors.length);
-//     return flavors[randomIndex];
-//   }
-// }
-
 export class IceCream {
   constructor(x, y, flavors) {
     this.x = x;
     this.y = y;
-    this.flavors = this.getRandomFlavor();
-    // this.color = [0, 0, 0];
-    this.size = 80;
-  }
-
-  getRandomFlavor() {
-    const flavors = [
+    this.flavors = random([
       "Vanilla",
       "Grape",
       "Strawberry",
       "Mint Chocolate Chip",
       "Cookies and Cream",
-    ];
-    const randomIndex = Math.floor(Math.random() * flavors.length);
-    return flavors[randomIndex];
+    ]);
+    this.velocity = 3;
+    this.size = 80;
   }
 
   show() {
-    push();
-    translate(this.x, this.y);
-    noStroke();
-    // fill(this.color);
-    ellipse(0, 0, 78, 78);
-    ellipse(-29, 35, 30, 30);
-    ellipse(0, 35, 30, 30);
-    ellipse(29, 35, 30, 30);
-
-    pop();
-
     if (this.flavors === "Strawberry") {
       // this.color([255, 0, 0]);
       fill(255, 0, 0);
@@ -67,10 +30,17 @@ export class IceCream {
       // this.color([0, 0, 0]);
       fill(0, 0, 0);
     }
+    push();
+    translate(this.x, this.y);
+    noStroke();
+    ellipse(0, 0, 78, 78);
+    ellipse(-29, 35, 30, 30);
+    ellipse(0, 35, 30, 30);
+    ellipse(29, 35, 30, 30);
+    pop();
   }
 
-
   moving() {
-    this.y = this.y + 3;
+    this.y = this.y + this.velocity;
   }
 }
