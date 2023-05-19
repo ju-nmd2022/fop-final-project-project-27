@@ -1,5 +1,6 @@
 import { Cone } from "./cone";
 import { IceCream } from "./icecream";
+import { Panel } from "./randomPanel";
 
 function scenery() {
   background(185, 233, 252);
@@ -13,6 +14,7 @@ function scenery() {
 }
 
 let cone;
+let panel;
 let iceCreams = [];
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
@@ -21,6 +23,7 @@ let iceCreams = [];
 function setup() {
   createCanvas(960, 540);
   cone = new Cone(450, 460);
+  panel = new Panel(900, 120);
 }
 
 //Variables
@@ -423,6 +426,12 @@ function draw() {
   //loop to take things backwards from the array
   for (let i = iceCreams.length - 1; i >= 0; i--) {
     if (cone.catches(iceCreams[i])) {
+      console.log(iceCreams[i].flavors);
+      if (iceCreams[i].flavors === panel.flavors) {
+        screenNextLevel();
+        setTimeout(screenNextLevel, 9000);
+        // panel.flavors();
+      }
       iceCreams.splice(i, 1);
       console.log("hello");
     } else if (iceCreams[i].y > height + 10) {
@@ -430,41 +439,5 @@ function draw() {
     }
   }
 
-  // console.log(iceCreams.length);
-  // movingCone();
-
-  // iceCreamStrawberry(100, 100);
-  // iceCreamMint(200, 100);
-  // iceCreamVanilla(300, 100);
-  // iceCreamGrape(100, 200);
-  // watermelon(200, 200);
-  // chocolateBar(300, 200);
-
-  // for (let i = 0; i < itemsFalling.length; i++) {
-  //   let item = itemsFalling[i];
-  //   item.y = item.y + item.speed;
-  //   if (item.y > 560) {
-  //     item.y = 0;
-  //     item.x = random(width);
-  //   }
-  //   if (item.type === "strawberry") {
-  //     iceCreamStrawberry(item.x, item.y);
-  //   } else if (item.type === "mint") {
-  //     iceCreamMint(item.x, item.y);
-  //   } else if (item.type === "vanilla") {
-  //     iceCreamVanilla(item.x, item.y);
-  //   } else if (item.type === "grape") {
-  //     iceCreamGrape(item.x, item.y);
-  //   } else if (item.type === "watermelon") {
-  //     watermelon(item.x, item.y);
-  //   } else if (item.type === "chocolate") {
-  //     chocolateBar(item.x, item.y);
-  //   }
-  // }
-
-  // console.log(itemsFalling);
+  panel.draw();
 }
-// const myIceCream = new IceCream(0, 0);
-// const randomFlavor = myIceCream.getRandomFlavor();
-
-// console.log(randomFlavor); // Output: Randomly selected ice cream flavor
