@@ -1,5 +1,5 @@
 export class IceCream {
-  constructor(x, y, flavors,velocity) {
+  constructor(x, y, flavors, velocity) {
     this.x = x;
     this.y = y;
     this.flavors = random([
@@ -9,7 +9,7 @@ export class IceCream {
       "Mint Chocolate Chip",
       "Licorice",
     ]);
-    this.velocity = 5;
+    this.velocity = 5 + level * 1.2;
     this.size = 80;
   }
 

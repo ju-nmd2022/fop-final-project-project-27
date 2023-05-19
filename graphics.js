@@ -231,10 +231,10 @@ function levelPanel() {
   stroke(190, 225, 230);
   strokeWeight(2);
   rect(410, 8, 130, 35, 20);
-  fill(0,0,0);
+  fill(0, 0, 0);
   textSize(20);
-  text("Level",440, 33);
-  text(level,500, 33);
+  text("Level", 440, 33);
+  text(level, 500, 33);
   pop();
 }
 
@@ -266,9 +266,7 @@ function screenNextLevel() {
   text("Next level🍦", 400, 290);
   clouds(313, 70);
   pop();
-
 }
-
 
 function clouds(x, y) {
   push();
@@ -322,7 +320,6 @@ function startScreen() {
   popcornDrawing(1070, -170);
 }
 
-
 //startScreen();
 
 //Instructions screen
@@ -369,10 +366,8 @@ function instructions() {
   triangle(604, 404, 576, 393, 577, 415);
   pop();
   cone.show();
-  
 
-  iceCreamStrawberry(450,60);
- 
+  iceCreamStrawberry(450, 60);
 }
 
 //instructions();
@@ -406,7 +401,7 @@ function loseScreen() {
   watermelon(1300, 200);
 }
 
-function gameActive (){
+function gameActive() {
   scenery();
   //   //instructionsPanel();
   //   // screenNextLevel();
@@ -417,11 +412,12 @@ function gameActive (){
   cone.show();
   cone.moving();
   panel.draw();
+
   // https://www.youtube.com/watch?v=_H9JIwWP7HQ
   // we had help from karl during the labs to structure the array and loop
 
   //5% of the time the new ice cream will be added
-  if (random(1) < 0.03) {
+  if (random(1) < 0.05) {
     iceCreams.push(new IceCream(random(width), random(-100, -20)));
   }
 
@@ -433,60 +429,44 @@ function gameActive (){
   //loop to take things backwards from the array
   for (let i = iceCreams.length - 1; i >= 0; i--) {
     if (cone.catches(iceCreams[i])) {
-      console.log(iceCreams[i].flavors);
       if (iceCreams[i].flavors === panel.flavors) {
-        // screenNextLevel();
+        screenNextLevel();
+        panel = new Panel(900, 120);
+
         // setTimeout(
         //   showNextLevelScreen = false, 5000);
-        // panel.flavors();
+        //
         level = level + 1;
-        iceCreams[i].velocity = iceCreams[i].velocity + 5;
-        console.log(iceCreams[i].velocity);
-      }
-      else {
+      } else {
         screen = 3;
         level = 1;
       }
       iceCreams.splice(i, 1);
-      console.log("hello");
     } else if (iceCreams[i].y > height + 10) {
       iceCreams.splice(i, 1);
-
     }
   }
 }
 
-
-
-function draw() { 
-
-// same mechanism Evellin and Isabel did for the lunar lander
+function draw() {
+  // same mechanism Evellin and Isabel did for the lunar lander
   if (screen === 0) {
     instructions();
   } else if (screen === 1) {
     startScreen();
-  } 
-  else if (screen === 2) {
+  } else if (screen === 2) {
     gameActive();
-  }  else if (screen === 3) {
-  loseScreen();
+  } else if (screen === 3) {
+    loseScreen();
   }
-
-  
 }
 
 function keyPressed() {
   if (screen === 0 && keyCode === 13) {
     screen = 1;
-    
   } else if (screen === 1 && keyCode === 13) {
     screen = 2;
-    // rocketSetup();
-    // gameMode();
   } else if (screen === 3 && keyCode === 13) {
     screen = 0;
-    // rocketSetup();
-    // gameMode();
   }
-
 }

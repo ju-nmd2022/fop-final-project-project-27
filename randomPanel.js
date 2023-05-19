@@ -13,19 +13,14 @@ export class Panel {
 
   draw() {
     if (this.flavors === "Strawberry") {
-
       fill(255, 0, 110);
     } else if (this.flavors === "Vanilla") {
-
       fill(240, 218, 157);
     } else if (this.flavors === "Grape") {
-
       fill(130, 46, 129);
     } else if (this.flavors === "Mint Chocolate Chip") {
-
       fill(187, 223, 140);
     } else if (this.flavors === "Licorice") {
- 
       fill(0, 0, 0);
     }
     push();
