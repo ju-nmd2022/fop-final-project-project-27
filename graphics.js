@@ -1,6 +1,6 @@
-import { Cone } from "./cone";
-import { IceCream } from "./icecream";
-import { Panel } from "./randomPanel";
+import { Cone } from "./cone.js";
+import { IceCream } from "./icecream.js";
+import { Panel } from "./randomPanel.js";
 
 function scenery() {
   background(185, 233, 252);
@@ -27,6 +27,7 @@ function setup() {
   cone = new Cone(400, 460);
   panel = new Panel(900, 120);
 }
+window.setup = setup;
 
 //Variables
 let x = 100;
@@ -430,7 +431,7 @@ function gameActive() {
   for (let i = iceCreams.length - 1; i >= 0; i--) {
     if (cone.catches(iceCreams[i])) {
       if (iceCreams[i].flavors === panel.flavors) {
-        screenNextLevel();
+        // screenNextLevel();
         panel = new Panel(900, 120);
 
         // setTimeout(
@@ -460,6 +461,7 @@ function draw() {
     loseScreen();
   }
 }
+window.draw = draw;
 
 function keyPressed() {
   if (screen === 0 && keyCode === 13) {
