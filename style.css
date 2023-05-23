@@ -1,12 +1,14 @@
 html,
 body {
   height: 100%;
+  /* width: fit-content; */
+  width: 100%;
 }
 
 body {
   background-color: rgba(185, 233, 252, 0.712);
-  margin: 0;
-  display: flex;
+  margin: 0px;
+  display: grid;
   /* This centers horizontally. */
   justify-content: center;
   /* This centers vertically. */
@@ -16,9 +18,11 @@ body {
 .title {
   font-family: cursive;
   color: rgb(241, 125, 200);
-  font-size: 80px;
-  float: left;
+  font-size: 70px;
+  justify-self: center;
+  height: 50px;
+  /* float: left;
   position: absolute;
   left: 520px;
-  top: 0px;
+  top: 0px; */
 }

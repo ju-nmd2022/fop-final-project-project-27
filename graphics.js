@@ -362,7 +362,7 @@ function gameActive() {
   // we had help from karl during the labs to structure the array and loop
 
   //5% of the time the new ice cream will be added
-  if (random(1) < 0.05) {
+  if (random(1) < 0.03) {
     iceCreams.push(new IceCream(random(canvas.width), random(-100, -20)));
     items.push(new ExtraItems(random(canvas.width), random(-100, -20)));
   }
@@ -377,6 +377,7 @@ function gameActive() {
   }
 
   //loop to take things backwards from the array
+  //collision
   for (let i = iceCreams.length - 1; i >= 0; i--) {
     if (cone.catches(iceCreams[i])) {
       if (iceCreams[i].flavors === panel.flavors) {
@@ -428,7 +429,6 @@ function keyPressed() {
     screen = 2;
   } else if (screen === 3 && keyCode === 13) {
     screen = 0;
-    gameActive();
     window.level = level;
   }
 }
