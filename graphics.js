@@ -3,12 +3,19 @@ import { IceCream } from "./icecream.js";
 import { Panel } from "./randomPanel.js";
 import { ExtraItems } from "./extraitems.js";
 
+//DOM selectors
+const saveButton = document.querySelector(".addScore")
+
+//Event listener
+saveButton.addEventListener("click", saveHighScore)
+
 function setup() {
   createCanvas(960, 540);
   cone = new Cone(400, 460);
   panel = new Panel(900, 120);
 }
 window.setup = setup;
+
 function scenery() {
   background(185, 233, 252);
   clouds();
@@ -31,7 +38,7 @@ window.level = level;
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
-// we've got help from Garrit to fix the y position problem
+// we received help from Garrit to fix the y position problem
 
 //ice cream flavors
 function iceCreamStrawberry(x, y) {
@@ -81,7 +88,7 @@ function iceCreamGrape(x, y) {
   ellipse(x + 29, y + 35, 30, 30);
   pop();
 }
-
+//extra items
 function watermelon(x, y) {
   push();
   translate(x, y);
@@ -123,7 +130,7 @@ function chocolateBar(x, y) {
   pop();
 }
 
-// //popcorn drawing
+//popcorn drawing
 function popcornDrawing(x, y) {
   push();
   translate(x, y);
@@ -141,6 +148,7 @@ function popcornDrawing(x, y) {
 
   push();
   translate(x, y);
+  fill(255, 255, 254);
   noStroke();
   rect(100, 100, 15, 80);
   rect(129, 100, 15, 80);
@@ -203,23 +211,6 @@ function randomIcecreamPattern() {
   rect(849, 10, 100, 230, 20);
   pop();
 }
-
-//next level screen
-// function screenNextLevel() {
-//   push();
-//   noStroke();
-//   fill(202, 186, 219);
-//   rect(380, 240, 200, 80, 20);
-//   stroke(255, 255, 255);
-//   strokeWeight(2);
-//   rect(390, 250, 180, 60, 20);
-//   noStroke();
-//   textSize(30);
-//   fill(255, 255, 255);
-//   text("Next level🍦", 400, 290);
-//   clouds(313, 70);
-//   pop();
-// }
 
 function clouds(x, y) {
   push();
@@ -291,7 +282,6 @@ function instructions() {
   text("Follow the pattern shown to move on to the next level ➡️", 375, 127);
   textSize(25);
   text("Move the cone with the left and right arrows", 228, 255);
-  fill(0, 0, 0);
   text("Press enter", 390, 350);
   pop();
 
@@ -349,7 +339,7 @@ function loseScreen() {
   chocolateBar(-520, 100);
   watermelon(1300, 200);
 }
-
+// the actual game
 function gameActive() {
   scenery();
   levelPanel();
@@ -387,6 +377,7 @@ function gameActive() {
         // https://stackoverflow.com/questions/2932782/global-variables-in-javascript-across-multiple-files
         window.level = level;
       } else {
+        cone = new Cone(400, 460);
         screen = 3;
         level = 1;
       }
@@ -398,6 +389,7 @@ function gameActive() {
 
   for (let i = items.length - 1; i >= 0; i--) {
     if (cone.collide(items[i])) {
+      cone = new Cone(400, 460);
       screen = 3;
       level = 1;
       items.splice(i, 1);
@@ -406,18 +398,20 @@ function gameActive() {
       items.splice(i, 1);
     }
   }
+  
 }
 
 function draw() {
   // same mechanism Evellin and Isabel did for the lunar lander
   if (screen === 0) {
-    instructions();
-  } else if (screen === 1) {
     startScreen();
+  } else if (screen === 1) {
+    instructions();
   } else if (screen === 2) {
     gameActive();
   } else if (screen === 3) {
     loseScreen();
+    showHighscore();
   }
 }
 window.draw = draw;
@@ -433,3 +427,35 @@ function keyPressed() {
   }
 }
 window.keyPressed = keyPressed;
+
+
+
+function saveHighScore(event) {
+  event.preventDefault();
+  const nameElement = document.getElementById("name");
+  let highscore = {
+    name: nameElement.value, 
+    score: level
+  }
+  if (localStorage.highscore === undefined) {
+    localStorage.highscore = JSON.stringify([]);
+  }
+  let highscoreArray = JSON.parse(localStorage.highscore);
+  highscoreArray.push(highscore);
+  localStorage.highscore = JSON.stringify(highscoreArray);
+}
+
+function showHighscore () {
+  if (localStorage.highscore != undefined) {
+    let highscoreArray = JSON.parse(localStorage.highscore);
+
+    const highScoreElement = document.getElementById("highScore"); 
+
+    for (let score of highscoreArray) {
+      const item = document.createElement("li");
+      item.innerText = score.name + ": " + score.level;
+      highScoreElement.appendChild(item);
+    }
+  }
+}
+
