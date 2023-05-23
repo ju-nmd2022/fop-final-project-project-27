@@ -2,6 +2,12 @@ import { Cone } from "./cone.js";
 import { IceCream } from "./icecream.js";
 import { Panel } from "./randomPanel.js";
 
+function setup() {
+  createCanvas(960, 540);
+  cone = new Cone(400, 460);
+  panel = new Panel(900, 120);
+}
+window.setup = setup;
 function scenery() {
   background(185, 233, 252);
   clouds();
@@ -18,68 +24,16 @@ let panel;
 let iceCreams = [];
 let screen = 0;
 let level = 1;
+window.level = level;
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
 // we've got help from Garrit to fix the y position problem
-function setup() {
-  createCanvas(960, 540);
-  cone = new Cone(400, 460);
-  panel = new Panel(900, 120);
-}
-window.setup = setup;
 
 //Variables
 let x = 100;
 let y = 60;
 let speed = 0;
-// let itemsFalling = [];
-
-//Ice cream cone drawing
-function iceCreamCone(x, y) {
-  push();
-  translate(x, y);
-  strokeWeight(2.5);
-  stroke(248, 171, 93);
-  fill(243, 201, 139);
-  triangle(420, 400, 460, 480, 500, 400);
-
-  //lines of the cone
-  line(430, 400, 465, 470);
-  line(440, 400, 470, 457);
-  line(450, 400, 475, 445);
-  line(460, 400, 480, 436);
-  line(470, 400, 485, 425);
-  line(480, 400, 492, 417);
-
-  line(490, 400, 455, 470);
-  line(480, 400, 450, 460);
-  line(470, 400, 445, 450);
-  line(460, 400, 440, 440);
-  line(450, 400, 435, 430);
-  line(440, 400, 430, 420);
-  pop();
-}
-
-function movingCone() {
-  iceCreamCone(x, y);
-
-  //move the cone with the arrow keys
-  x = x + speed;
-  if (keyIsDown(39)) {
-    speed = 15;
-  } else if (keyIsDown(37)) {
-    speed = -10;
-  } else {
-    speed = 0;
-  }
-  //boundary on both sides of the screen
-  if (x > 450) {
-    x = 450;
-  } else if (x < -415) {
-    x = -415;
-  }
-}
 
 //ice cream flavors
 function iceCreamStrawberry(x, y) {
@@ -244,11 +198,11 @@ function randomIcecreamPattern() {
   push();
   noStroke();
   fill(255, 255, 255);
-  rect(840, 0, 115, 260, 20);
+  rect(840, 0, 118, 250, 20);
   stroke(190, 225, 230);
   strokeWeight(2);
   noFill();
-  rect(849, 14, 100, 230, 20);
+  rect(849, 10, 100, 230, 20);
   pop();
 }
 
@@ -292,7 +246,7 @@ function startScreen() {
   push();
   fill(0, 0, 0);
   textSize(25);
-  text("Press any key to start", 355, 280);
+  text("Press enter to start", 355, 280);
   pop();
 
   push();
@@ -309,19 +263,17 @@ function startScreen() {
   clouds(129, 327);
   clouds(797, -46);
 
-  iceCreamCone(-280, -280);
-  iceCreamStrawberry(-279, -280);
-  iceCreamCone(319, 11);
-  iceCreamMint(319, 11);
-  watermelon(600, 50);
-  chocolateBar(-360, 190);
-  iceCreamCone(320, -140);
-  iceCreamVanilla(320, -140);
-  lollipopDrawing(350, -39);
-  popcornDrawing(1070, -170);
+  // iceCreamCone(-280, -280);
+  // iceCreamStrawberry(-279, -280);
+  // iceCreamCone(319, 11);
+  // iceCreamMint(319, 11);
+  // watermelon(600, 50);
+  // chocolateBar(-360, 190);
+  // iceCreamCone(320, -140);
+  // iceCreamVanilla(320, -140);
+  // lollipopDrawing(350, -39);
+  // popcornDrawing(1070, -170);
 }
-
-//startScreen();
 
 //Instructions screen
 function instructions() {
@@ -371,8 +323,6 @@ function instructions() {
   iceCreamStrawberry(450, 60);
 }
 
-//instructions();
-
 //Losing screen
 function loseScreen() {
   scenery();
@@ -404,10 +354,6 @@ function loseScreen() {
 
 function gameActive() {
   scenery();
-  //   //instructionsPanel();
-  //   // screenNextLevel();
-  //   // loseScreen();
-  //   // startScreen();
   levelPanel();
   randomIcecreamPattern();
   cone.show();
@@ -419,7 +365,7 @@ function gameActive() {
 
   //5% of the time the new ice cream will be added
   if (random(1) < 0.05) {
-    iceCreams.push(new IceCream(random(width), random(-100, -20)));
+    iceCreams.push(new IceCream(random(canvas.width), random(-100, -20)));
   }
 
   for (let iceCream of iceCreams) {
@@ -431,13 +377,11 @@ function gameActive() {
   for (let i = iceCreams.length - 1; i >= 0; i--) {
     if (cone.catches(iceCreams[i])) {
       if (iceCreams[i].flavors === panel.flavors) {
-        // screenNextLevel();
         panel = new Panel(900, 120);
-
-        // setTimeout(
-        //   showNextLevelScreen = false, 5000);
-        //
         level = level + 1;
+        //level to become available to all windows in order to increase the velocity
+        // https://stackoverflow.com/questions/2932782/global-variables-in-javascript-across-multiple-files
+        window.level = level;
       } else {
         screen = 3;
         level = 1;
@@ -470,5 +414,7 @@ function keyPressed() {
     screen = 2;
   } else if (screen === 3 && keyCode === 13) {
     screen = 0;
+    window.level = level;
   }
 }
+window.keyPressed = keyPressed;

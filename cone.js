@@ -40,9 +40,9 @@ export class Cone {
   moving() {
     this.x = this.x + this.s;
     if (keyIsDown(39)) {
-      this.s = 25;
+      this.s = 15;
     } else if (keyIsDown(37)) {
-      this.s = -25;
+      this.s = -15;
     } else {
       this.s = 0;
     }
