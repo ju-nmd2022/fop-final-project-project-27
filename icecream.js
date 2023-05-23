@@ -9,8 +9,7 @@ export class IceCream {
       "Mint Chocolate Chip",
       "Licorice",
     ]);
-    this.velocity = 3 + level * 1.2;
-    // this.velocity = 5;
+    this.velocity = 1 + level * 1.2;
     this.size = 80;
   }
 
@@ -40,7 +39,4 @@ export class IceCream {
     this.y = this.y + this.velocity;
     this.velocity = this.velocity + 0.03;
   }
-  // movingUpdate() {
-  //   this.velocity = this.velocity + 1;
-  // }
 }

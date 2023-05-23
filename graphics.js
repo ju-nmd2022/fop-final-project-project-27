@@ -1,6 +1,7 @@
 import { Cone } from "./cone.js";
 import { IceCream } from "./icecream.js";
 import { Panel } from "./randomPanel.js";
+import { ExtraItems } from "./extraitems.js";
 
 function setup() {
   createCanvas(960, 540);
@@ -19,9 +20,11 @@ function scenery() {
   clouds(797, -46);
 }
 
+//Variables
 let cone;
 let panel;
 let iceCreams = [];
+let items = [];
 let screen = 0;
 let level = 1;
 window.level = level;
@@ -29,11 +32,6 @@ window.level = level;
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
 // we've got help from Garrit to fix the y position problem
-
-//Variables
-let x = 100;
-let y = 60;
-let speed = 0;
 
 //ice cream flavors
 function iceCreamStrawberry(x, y) {
@@ -207,21 +205,21 @@ function randomIcecreamPattern() {
 }
 
 //next level screen
-function screenNextLevel() {
-  push();
-  noStroke();
-  fill(202, 186, 219);
-  rect(380, 240, 200, 80, 20);
-  stroke(255, 255, 255);
-  strokeWeight(2);
-  rect(390, 250, 180, 60, 20);
-  noStroke();
-  textSize(30);
-  fill(255, 255, 255);
-  text("Next level🍦", 400, 290);
-  clouds(313, 70);
-  pop();
-}
+// function screenNextLevel() {
+//   push();
+//   noStroke();
+//   fill(202, 186, 219);
+//   rect(380, 240, 200, 80, 20);
+//   stroke(255, 255, 255);
+//   strokeWeight(2);
+//   rect(390, 250, 180, 60, 20);
+//   noStroke();
+//   textSize(30);
+//   fill(255, 255, 255);
+//   text("Next level🍦", 400, 290);
+//   clouds(313, 70);
+//   pop();
+// }
 
 function clouds(x, y) {
   push();
@@ -240,13 +238,13 @@ function startScreen() {
   push();
   noStroke();
   fill(255, 255, 255);
-  rect(330, 245, 300, 50, 10);
+  rect(330, 245, 300, 50, 20);
   pop();
 
   push();
   fill(0, 0, 0);
   textSize(25);
-  text("Press enter to start", 355, 280);
+  text("Press enter to start", 375, 280);
   pop();
 
   push();
@@ -263,16 +261,14 @@ function startScreen() {
   clouds(129, 327);
   clouds(797, -46);
 
-  // iceCreamCone(-280, -280);
-  // iceCreamStrawberry(-279, -280);
-  // iceCreamCone(319, 11);
-  // iceCreamMint(319, 11);
-  // watermelon(600, 50);
-  // chocolateBar(-360, 190);
-  // iceCreamCone(320, -140);
-  // iceCreamVanilla(320, -140);
-  // lollipopDrawing(350, -39);
-  // popcornDrawing(1070, -170);
+  iceCreamGrape(120, 30);
+  iceCreamStrawberry(200, 220);
+  iceCreamMint(30, 100);
+  watermelon(220, 80);
+  chocolateBar(600, 10);
+  iceCreamVanilla(420, 80);
+  lollipopDrawing(10, 150);
+  popcornDrawing(610, 330);
 }
 
 //Instructions screen
@@ -282,18 +278,21 @@ function instructions() {
   push();
   fill(202, 186, 219);
   rect(370, 95, 460, 50, 9);
-  rect(220, 248, 500, 48, 9);
+  rect(220, 220, 500, 48, 9);
   stroke(255, 255, 255);
   rect(370, 95, 460, 50, 9);
-  rect(220, 248, 500, 48, 9);
+  rect(220, 220, 500, 48, 9);
+  rect(380, 318, 150, 48, 9);
   pop();
 
   push();
   fill(255, 255, 255);
-  textSize(25);
-  text("Move the cone with the left and right arrows", 230, 280);
   textSize(18);
   text("Follow the pattern shown to move on to the next level ➡️", 375, 127);
+  textSize(25);
+  text("Move the cone with the left and right arrows", 228, 255);
+  fill(0, 0, 0);
+  text("Press enter", 390, 350);
   pop();
 
   push();
@@ -338,14 +337,13 @@ function loseScreen() {
   push();
   fill(202, 186, 219);
   stroke(255, 255, 255);
-  rect(365, 185, 300, 60, 9);
-
+  rect(335, 200, 300, 60, 9);
   pop();
 
   push();
   fill(255, 255, 255);
   textSize(45);
-  text("Try again 🥺", 400, 230);
+  text("Try again 🥺", 370, 245);
   pop();
 
   chocolateBar(-520, 100);
@@ -366,11 +364,16 @@ function gameActive() {
   //5% of the time the new ice cream will be added
   if (random(1) < 0.05) {
     iceCreams.push(new IceCream(random(canvas.width), random(-100, -20)));
+    items.push(new ExtraItems(random(canvas.width), random(-100, -20)));
   }
 
   for (let iceCream of iceCreams) {
     iceCream.show();
     iceCream.moving();
+  }
+  for (let item of items) {
+    item.show();
+    item.moving();
   }
 
   //loop to take things backwards from the array
@@ -389,6 +392,17 @@ function gameActive() {
       iceCreams.splice(i, 1);
     } else if (iceCreams[i].y > height + 10) {
       iceCreams.splice(i, 1);
+    }
+  }
+
+  for (let i = items.length - 1; i >= 0; i--) {
+    if (cone.collide(items[i])) {
+      screen = 3;
+      level = 1;
+      items.splice(i, 1);
+      console.log(items);
+    } else if (items[i].y > height + 10) {
+      items.splice(i, 1);
     }
   }
 }
@@ -414,6 +428,7 @@ function keyPressed() {
     screen = 2;
   } else if (screen === 3 && keyCode === 13) {
     screen = 0;
+    gameActive();
     window.level = level;
   }
 }
