@@ -3,10 +3,28 @@ import { IceCream } from "./icecream.js";
 import { Panel } from "./randomPanel.js";
 import { ExtraItems } from "./extraitems.js";
 
+//Variables for the sounds
+let nextLevel;
+let backgroundSound;
+let loseSound;
+
+/*Adding sounds effects based on these references:
+https://p5js.org/reference/#/p5/loadSound
+https://www.youtube.com/watch?v=40Me1-yAtTc
+https://www.youtube.com/watch?v=uHNgkQsHLXQ&t=133s*/
+
+function preload() {
+  soundFormats("mp3");
+  nextLevel = loadSound("Sounds/achive-sound-132273");
+  backgroundSound = loadSound("Sounds/latin-groove-118703.mp3");
+  loseSound = loadSound("Sounds/error-126627.mp3");
+}
+window.preload = preload;
 function setup() {
   createCanvas(960, 540);
   cone = new Cone(400, 460);
   panel = new Panel(900, 120);
+  backgroundSoundSettings();
 }
 window.setup = setup;
 function scenery() {
@@ -19,7 +37,12 @@ function scenery() {
   clouds(129, 327);
   clouds(797, -46);
 }
-
+function backgroundSoundSettings() {
+  backgroundSound.play();
+  backgroundSound.loop();
+  backgroundSound.setVolume(0.3);
+  userStartAudio();
+}
 //Variables
 let cone;
 let panel;
@@ -28,6 +51,7 @@ let items = [];
 let screen = 0;
 let level = 1;
 window.level = level;
+
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
@@ -383,10 +407,12 @@ function gameActive() {
       if (iceCreams[i].flavors === panel.flavors) {
         panel = new Panel(900, 120);
         level = level + 1;
+        nextLevel.play();
         //level to become available to all windows in order to increase the velocity
         // https://stackoverflow.com/questions/2932782/global-variables-in-javascript-across-multiple-files
         window.level = level;
       } else {
+        loseSound.play();
         screen = 3;
         level = 1;
       }
@@ -398,6 +424,7 @@ function gameActive() {
 
   for (let i = items.length - 1; i >= 0; i--) {
     if (cone.collide(items[i])) {
+      loseSound.play();
       screen = 3;
       level = 1;
       items.splice(i, 1);
@@ -416,6 +443,7 @@ function draw() {
     startScreen();
   } else if (screen === 2) {
     gameActive();
+    // backgroundSound.play();
   } else if (screen === 3) {
     loseScreen();
   }
