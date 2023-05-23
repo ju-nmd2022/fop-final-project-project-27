@@ -3,12 +3,6 @@ import { IceCream } from "./icecream.js";
 import { Panel } from "./randomPanel.js";
 import { ExtraItems } from "./extraitems.js";
 
-//DOM selectors
-const saveButton = document.querySelector(".addScore")
-
-//Event listener
-saveButton.addEventListener("click", saveHighScore)
-
 //Variables for the sounds
 let nextLevel;
 let backgroundSound;
@@ -427,7 +421,6 @@ function gameActive() {
       items.splice(i, 1);
     }
   }
-  
 }
 
 function draw() {
@@ -458,15 +451,22 @@ function keyPressed() {
 }
 window.keyPressed = keyPressed;
 
+//Leader board based on Garrit's class
 
+//DOM selectors
+const saveButton = document.querySelector(".addScore");
+
+//Event listener
+saveButton.addEventListener("click", saveHighScore);
 
 function saveHighScore(event) {
+  //prevent the refresh
   event.preventDefault();
   const nameElement = document.getElementById("name");
   let highscore = {
-    name: nameElement.value, 
-    score: level
-  }
+    name: nameElement.value,
+    score: window.level,
+  };
   if (localStorage.highscore === undefined) {
     localStorage.highscore = JSON.stringify([]);
   }
@@ -475,17 +475,22 @@ function saveHighScore(event) {
   localStorage.highscore = JSON.stringify(highscoreArray);
 }
 
-function showHighscore () {
-  if (localStorage.highscore != undefined) {
+function showHighscore() {
+  if (localStorage.highscore !== undefined) {
     let highscoreArray = JSON.parse(localStorage.highscore);
+    highscoreArray.sort(function (a, b) {
+      return b.score - a.score;
+    });
+    const highScoreElement = document.getElementById("highScore");
 
-    const highScoreElement = document.getElementById("highScore"); 
+    /*this is to clear previously created li, 
+    otherwise it keeps repeating and creating infinite li*/
+    highScoreElement.innerHTML = "";
 
     for (let score of highscoreArray) {
       const item = document.createElement("li");
-      item.innerText = score.name + ": " + score.level;
+      item.innerText = score.name + ": " + score.score;
       highScoreElement.appendChild(item);
     }
   }
 }
-
