@@ -11,15 +11,19 @@ let loseSound;
 /*Adding sounds effects based on these references:
 https://p5js.org/reference/#/p5/loadSound
 https://www.youtube.com/watch?v=40Me1-yAtTc
-https://www.youtube.com/watch?v=uHNgkQsHLXQ&t=133s*/
+https://www.youtube.com/watch?v=uHNgkQsHLXQ&t=133s
+All sound effects were taken from pixabay with free license */
 
+//function for the sounds
 function preload() {
   soundFormats("mp3");
   nextLevel = loadSound("Sounds/achive-sound-132273");
   backgroundSound = loadSound("Sounds/latin-groove-118703.mp3");
   loseSound = loadSound("Sounds/error-126627.mp3");
 }
+//to make it available to all files
 window.preload = preload;
+
 function setup() {
   createCanvas(960, 540);
   cone = new Cone(400, 460);
@@ -28,6 +32,7 @@ function setup() {
 }
 window.setup = setup;
 
+//Draw the scenery
 function scenery() {
   background(185, 233, 252);
   clouds();
@@ -38,6 +43,8 @@ function scenery() {
   clouds(129, 327);
   clouds(797, -46);
 }
+
+// Sounds settings
 function backgroundSoundSettings() {
   backgroundSound.play();
   backgroundSound.loop();
@@ -56,9 +63,9 @@ window.level = level;
 // https://happycoding.io/tutorials/p5js/arrays
 // https://www.youtube.com/watch?v=_H9JIwWP7HQ
 // debug chatgpt
-// we received help from Garrit to fix the y position problem
+// we received help from Garrit to fix the y position problem with the items
 
-//ice cream flavors
+//ice cream flavors drawing for the first page
 function iceCreamStrawberry(x, y) {
   push();
   translate(x, y);
@@ -106,7 +113,6 @@ function iceCreamGrape(x, y) {
   ellipse(x + 29, y + 35, 30, 30);
   pop();
 }
-//extra items
 function watermelon(x, y) {
   push();
   translate(x, y);
@@ -148,7 +154,6 @@ function chocolateBar(x, y) {
   pop();
 }
 
-//popcorn drawing
 function popcornDrawing(x, y) {
   push();
   translate(x, y);
@@ -177,7 +182,6 @@ function popcornDrawing(x, y) {
   pop();
 }
 
-//lollipop drawing
 function lollipopDrawing(x, y) {
   push();
   translate(x, y);
@@ -352,12 +356,15 @@ function loseScreen() {
   fill(255, 255, 255);
   textSize(45);
   text("Try again 🥺", 370, 245);
+  textSize(30);
+  text("Press enter", 400, 320);
   pop();
 
   chocolateBar(-520, 100);
   watermelon(1300, 200);
 }
-// the actual game
+
+// All mechanisms to make the game work
 function gameActive() {
   scenery();
   levelPanel();
@@ -369,7 +376,7 @@ function gameActive() {
   // https://www.youtube.com/watch?v=_H9JIwWP7HQ
   // we had help from karl during the labs to structure the array and loop
 
-  //5% of the time the new ice cream will be added
+  //3% of the time the new ice cream will be added
   if (random(1) < 0.03) {
     iceCreams.push(new IceCream(random(canvas.width), random(-100, -20)));
     items.push(new ExtraItems(random(canvas.width), random(-100, -20)));
@@ -397,9 +404,7 @@ function gameActive() {
         window.level = level;
       } else {
         cone = new Cone(400, 460);
-
         loseSound.play();
-
         screen = 3;
         level = 1;
       }
@@ -439,6 +444,7 @@ function draw() {
 }
 window.draw = draw;
 
+// To make the screens and the enter button to work
 function keyPressed() {
   if (screen === 0 && keyCode === 13) {
     screen = 1;
@@ -451,46 +457,58 @@ function keyPressed() {
 }
 window.keyPressed = keyPressed;
 
-//Leader board based on Garrit's class
 
+//Leader board based on Garrit's class
 //DOM selectors
 const saveButton = document.querySelector(".addScore");
 
 //Event listener
 saveButton.addEventListener("click", saveHighScore);
-
+saveButton.disabled= false;
 function saveHighScore(event) {
   //prevent the refresh
-  event.preventDefault();
+  event.preventDefault();  
+  // if (nameElement === "") {
+  //   saveButton.disabled = true;
+  // }
+  // else {
+  //   saveButton.disabled = false;
+  // }
   const nameElement = document.getElementById("name");
   let highscore = {
     name: nameElement.value,
     score: window.level,
   };
+
+
   if (localStorage.highscore === undefined) {
     localStorage.highscore = JSON.stringify([]);
   }
   let highscoreArray = JSON.parse(localStorage.highscore);
   highscoreArray.push(highscore);
   localStorage.highscore = JSON.stringify(highscoreArray);
+  nameElement.value = "";
+
 }
 
 function showHighscore() {
   if (localStorage.highscore !== undefined) {
     let highscoreArray = JSON.parse(localStorage.highscore);
+    
     highscoreArray.sort(function (a, b) {
       return b.score - a.score;
     });
     const highScoreElement = document.getElementById("highScore");
 
-    /*this is to clear previously created li, 
+    /* this is to clear previously created li, 
     otherwise it keeps repeating and creating infinite li*/
     highScoreElement.innerHTML = "";
 
     for (let score of highscoreArray) {
-      const item = document.createElement("li");
-      item.innerText = score.name + ": " + score.score;
-      highScoreElement.appendChild(item);
+      const newScore = document.createElement("li");
+      newScore.classList.add("new-score");
+      newScore.innerText = score.name + ": " + score.score;
+      highScoreElement.appendChild(newScore);
     }
   }
 }

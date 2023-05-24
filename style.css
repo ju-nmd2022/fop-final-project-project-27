@@ -35,7 +35,7 @@ form {
   grid-row: 4;
   display: flex;
   flex-direction: row;
-  justify-self: flex-start;
+  justify-self: center;
 }
 form input,
 form button {
@@ -49,4 +49,9 @@ form button {
 }
 .addScore:hover {
   background-color: #fdcedf;
+}
+.new-score {
+list-style: none;
+display: grid;
+grid-row: 5;
 }
