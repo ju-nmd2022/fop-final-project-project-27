@@ -1,0 +1,59 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: rgba(185, 233, 252, 0.712);
+  margin: 0px;
+  display: grid;
+  /* This centers horizontally. */
+  justify-content: center;
+  /* This centers vertically. */
+  align-items: center;
+}
+
+.title {
+  font-family: "Cherry Bomb One";
+  color: rgb(241, 125, 200);
+  font-size: 70px;
+  justify-self: center;
+  height: 120px;
+  grid-row: 1;
+}
+.leaderBoard {
+  justify-self: center;
+  font-family: 'Silkscreen';
+  grid-row: 3;
+  color: #000000;
+}
+form {
+  font-family: Arial, Helvetica, sans-serif;
+  display: grid;
+  grid-row: 4;
+  justify-self: center;
+}
+form input,
+form button {
+  grid-row: 1;
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: none;
+  height: fit-content;
+}
+.addScore {
+  background-color: #62cdff;
+}
+.addScore:hover {
+  background-color: #fdcedf;
+}
+.new-score {
+  list-style: none;
+  background-color: #fbe4ec;
+  border-radius: 6px;
+}
+
+ul {
+  grid-row: 4;
+}
