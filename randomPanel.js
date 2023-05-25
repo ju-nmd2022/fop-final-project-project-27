@@ -1,5 +1,5 @@
 export class Panel {
-  constructor(x, y, flavors) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.flavors = random([

@@ -321,6 +321,21 @@ function instructions() {
   rect(545, 385, 90, 40, 10);
   pop();
 
+  push();
+  stroke(255, 255, 255);
+  fill(202, 186, 219);
+  rect(800, 300, 130, 140, 10);
+  pop();
+
+  push();
+  fill(255, 255, 255);
+  textSize(16);
+  text("Write your name", 805, 340);
+  text("on the leader", 805, 355);
+  text("board after you", 805, 370);
+  text("have played!", 805, 385);
+  pop();
+
   randomIcecreamPattern();
   push();
 
@@ -464,37 +479,33 @@ const saveButton = document.querySelector(".addScore");
 
 //Event listener
 saveButton.addEventListener("click", saveHighScore);
-saveButton.disabled= false;
+
 function saveHighScore(event) {
   //prevent the refresh
-  event.preventDefault();  
-  // if (nameElement === "") {
-  //   saveButton.disabled = true;
-  // }
-  // else {
-  //   saveButton.disabled = false;
-  // }
+  event.preventDefault();
   const nameElement = document.getElementById("name");
-  let highscore = {
-    name: nameElement.value,
-    score: window.level,
-  };
 
-
-  if (localStorage.highscore === undefined) {
-    localStorage.highscore = JSON.stringify([]);
+  if (nameElement.value === "") {
+    alert("Write your name 😎");
+  } else {
+    let highscore = {
+      name: nameElement.value,
+      score: window.level,
+    };
+    if (localStorage.highscore === undefined) {
+      localStorage.highscore = JSON.stringify([]);
+    }
+    let highscoreArray = JSON.parse(localStorage.highscore);
+    highscoreArray.push(highscore);
+    localStorage.highscore = JSON.stringify(highscoreArray);
+    nameElement.value = "";
   }
-  let highscoreArray = JSON.parse(localStorage.highscore);
-  highscoreArray.push(highscore);
-  localStorage.highscore = JSON.stringify(highscoreArray);
-  nameElement.value = "";
-
 }
 
 function showHighscore() {
   if (localStorage.highscore !== undefined) {
     let highscoreArray = JSON.parse(localStorage.highscore);
-    
+
     highscoreArray.sort(function (a, b) {
       return b.score - a.score;
     });

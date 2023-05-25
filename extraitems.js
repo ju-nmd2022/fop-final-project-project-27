@@ -1,5 +1,5 @@
 export class ExtraItems {
-  constructor(x, y, velocity) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.items = random(["Watermelon", "Chocolate", "Pop corn", "Lollipop"]);

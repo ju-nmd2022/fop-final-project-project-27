@@ -1,5 +1,5 @@
 export class IceCream {
-  constructor(x, y, flavors, velocity) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.flavors = random([
