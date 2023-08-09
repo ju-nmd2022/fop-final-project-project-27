@@ -51,6 +51,7 @@ function backgroundSoundSettings() {
   backgroundSound.setVolume(0.3);
   userStartAudio();
 }
+
 //Variables
 let cone;
 let panel;
@@ -58,6 +59,7 @@ let iceCreams = [];
 let items = [];
 let screen = 0;
 let level = 1;
+let lives = 3;
 window.level = level;
 
 // https://happycoding.io/tutorials/p5js/arrays
@@ -388,11 +390,20 @@ function gameActive() {
   cone.moving();
   panel.draw();
 
+//Lives display
+  push();
+  fill(0);
+  textSize(20);
+  text("Lives: ", 20, 30);
+  text(lives, 80, 30);
+  text()
+  pop();
+
   // https://www.youtube.com/watch?v=_H9JIwWP7HQ
   // we had help from karl during the labs to structure the array and loop
 
   //3% of the time the new ice cream will be added
-  if (random(1) < 0.03) {
+  if (random(1) < 0.04) {
     iceCreams.push(new IceCream(random(canvas.width), random(-100, -20)));
     items.push(new ExtraItems(random(canvas.width), random(-100, -20)));
   }
@@ -418,6 +429,9 @@ function gameActive() {
         // https://stackoverflow.com/questions/2932782/global-variables-in-javascript-across-multiple-files
         window.level = level;
       } else {
+        lives--;//Lives decrease if you do not catch the correct falvor
+      }
+      if (lives === 0){//If lives get to 0, you lose and the game resets
         cone = new Cone(400, 460);
         loseSound.play();
         screen = 3;
@@ -431,14 +445,17 @@ function gameActive() {
 
   for (let i = items.length - 1; i >= 0; i--) {
     if (cone.collide(items[i])) {
-      cone = new Cone(400, 460);
-      loseSound.play();
-      screen = 3;
-      level = 1;
+      lives--;//If you catch a random item, the lives decrease
       items.splice(i, 1);
       console.log(items);
     } else if (items[i].y > height + 10) {
       items.splice(i, 1);
+    }
+    if (lives === 0) {
+      cone = new Cone(400, 460);
+      loseSound.play();
+      screen = 3;
+      level = 1;
     }
   }
 }
@@ -455,6 +472,7 @@ function draw() {
   } else if (screen === 3) {
     loseScreen();
     showHighscore();
+    lives = 3;
   }
 }
 window.draw = draw;
